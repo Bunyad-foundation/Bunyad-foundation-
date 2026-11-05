@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بونیاد فاوندەیشن | Bunyad Foundation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #120b22;
+      --purple-primary: #8a2be2;
+      --purple-deep: #4b0082;
+      --pink-neon: #ff2a85;
+      --pink-soft: #ff758c;
+      --white-pure: #ffffff;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 15% 20%, #300c42 0%, #11051f 50%, #08020e 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* پاشبنەمای ئەندازیاری و گڵۆوەکان */
+    .blueprint-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 42, 133, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(138, 43, 226, 0.08) 1px, transparent 1px);
+      background-size: 35px 35px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .glow-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.55;
+      z-index: 1;
+      animation: float 10s ease-in-out infinite alternate;
+    }
+
+    .glow-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--purple-primary);
+      top: -50px;
+      left: -50px;
+    }
+
+    .glow-2 {
+      width: 350px;
+      height: 350px;
+      background: var(--pink-neon);
+      bottom: -60px;
+      right: -60px;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 40px) scale(1.15); }
+    }
+
+    /* کانتینەری سەرەکی */
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 580px;
+      margin: 30px auto;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 45px 35px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45),
+                  inset 0 0 15px rgba(255, 255, 255, 0.05);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* بەشی سەرەتا: فۆرمی داخڵکردن */
+    #login-section {
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .form-header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--pink-neon), var(--purple-primary));
+      border-radius: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      box-shadow: 0 12px 25px rgba(255, 42, 133, 0.35);
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      text-align: right;
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffd2ea;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--pink-soft);
+      font-size: 18px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      padding: 14px 50px 14px 18px;
+      border-radius: 14px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--pink-neon);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 18px rgba(255, 42, 133, 0.3);
+    }
+
+    button.btn-submit {
+      width: 100%;
+      padding: 15px;
+      border-radius: 15px;
+      background: linear-gradient(90deg, var(--pink-neon), var(--purple-primary));
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(255, 42, 133, 0.35);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button.btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(138, 43, 226, 0.5);
+    }
+
+    /* بەشی وێبسایتی سەرەکی */
+    #portal-section {
+      display: none;
+      text-align: center;
+      animation: zoomIn 0.7s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    .logo-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 25px;
+    }
+
+    .logo-glow {
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      background: linear-gradient(45deg, var(--pink-neon), var(--purple-primary));
+      border-radius: 50%;
+      filter: blur(25px);
+      opacity: 0.8;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .logo-box {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      color: #fff;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .main-title {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #ffffff, #ffb3d9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .welcome-text {
+      font-size: 19px;
+      font-weight: 700;
+      color: #f7a8d0;
+      margin-bottom: 12px;
+    }
+
+    .user-greeting {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 13px;
+      color: #fff;
+      margin-bottom: 25px;
+    }
+
+    .user-greeting span {
+      color: var(--pink-soft);
+      font-weight: 700;
+    }
+
+    .description {
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 30px;
+      padding: 15px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    /* ئایکۆنە ئەندازیارییەکان */
+    .icons-row {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .eng-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #ff9ec7;
+      transition: all 0.3s ease;
+    }
+
+    .eng-icon-box:hover {
+      transform: translateY(-5px) scale(1.1);
+      background: var(--purple-primary);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(138, 43, 226, 0.4);
+    }
+
+    .footer-badge {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-badge i {
+      color: var(--pink-neon);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blueprint-grid"></div>
+  <div class="glow-circle glow-1"></div>
+  <div class="glow-circle glow-2"></div>
+
+  <div class="container">
+    
+    <!-- بەشی یەکەم: داخڵکردنی زانیاری -->
+    <div id="login-section" class="card">
+      <div class="form-header-icon">
+        <i class="fa-solid fa-compass-drafting"></i>
+      </div>
+      <h2>بەخێربێن</h2>
+      <p class="subtitle">تکایە زانیارییەکانت داخڵ بکە بۆ چوونەژوورەوە</p>
+
+      <form id="entryForm" onsubmit="handleLogin(event)">
+        <div class="input-group">
+          <label for="fullName">ناوی سیانی</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="fullName" placeholder="ناوی سیانیت بنووسە..." required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="university">ئەو زانکۆیەی لێی دەخوێنیت</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <input type="text" id="university" placeholder="ناوی زانکۆکەت بنووسە..." required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <i class="fa-solid fa-arrow-left" style="margin-left: 8px;"></i> چوونەژوورەوە
+        </button>
+      </form>
+    </div>
+
+    <!-- بەشی دووەم: پۆرتاڵی بونیاد فاوندەیشن -->
+    <div id="portal-section" class="card">
+      <div class="logo-container">
+        <div class="logo-glow"></div>
+        <div class="logo-box">
+          <i class="fa-solid fa-cubes-stacked"></i>
+        </div>
+      </div>
+
+      <h1 class="main-title">Bunyad foundation</h1>
+      <h3 class="welcome-text">بەخێربیت بۆ وێبسایتی بونیاد فاوندەیشن</h3>
+
+      <div class="user-greeting">
+        ئەندازیار: <span id="display-name"></span> | زانکۆی <span id="display-uni"></span>
+      </div>
+
+      <p class="description">
+        سەرچاوەیەک بۆ خزمەتی فێرخوازان لەبەشەکانی ئەندازیاری
+      </p>
+
+      <!-- ئایکۆنە ئەندازیارییەکان -->
+      <div class="icons-row">
+        <div class="eng-icon-box" title="دیزاینی نەخشە"><i class="fa-solid fa-drafting-compass"></i></div>
+        <div class="eng-icon-box" title="بیناسازی"><i class="fa-solid fa-helmet-safety"></i></div>
+        <div class="eng-icon-box" title="پێوانەکاری"><i class="fa-solid fa-ruler-combined"></i></div>
+        <div class="eng-icon-box" title="ستراکچەر"><i class="fa-solid fa-building"></i></div>
+      </div>
+
+      <div class="footer-badge">
+        <i class="fa-solid fa-heart"></i>
+        <span>ئەم پڕۆجیکتە پەرەی پێدراوە لەلایەن خوێندکارانی زانکۆی گەرمیان</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function handleLogin(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('fullName').value.trim();
+      const university = document.getElementById('university').value.trim();
+
+      if (name && university) {
+        document.getElementById('display-name').innerText = name;
+        document.getElementById('display-uni').innerText = university;
+
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('portal-section').style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
