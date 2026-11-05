@@ -343,25 +343,9 @@
   </style>
 </head>
 <body>
-<!-- بەشی وێنەی جوڵاوی سەرەوە -->
-<div style="position: relative; width: 100%; height: 350px; overflow: hidden; border-radius: 12px; margin-bottom: 20px;">
-  <img id="mainSlider" src="slide1.jpg" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease-in-out;">
-</div>
 
-<script>
-  const sliderImages = ['slide1.jpg', 'slide2.jpg'];
-  let currentImageIndex = 0;
-  const sliderElement = document.getElementById('mainSlider');
 
-  setInterval(() => {
-    currentImageIndex = (currentImageIndex + 1) % sliderImages.length;
-    sliderElement.style.opacity = '0';
-    setTimeout(() => {
-      sliderElement.src = sliderImages[currentImageIndex];
-      sliderElement.style.opacity = '1';
-    }, 500);
-  }, 3500);
-</script>
+
 
   <div class="blueprint-grid"></div>
   <div class="glow-circle glow-1"></div>
