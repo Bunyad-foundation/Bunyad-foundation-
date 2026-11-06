@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پەڕەی نوێ | بونیاد فاوندەیشن</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #120b22;
+      --purple-primary: #8a2be2;
+      --pink-neon: #ff2a85;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 15% 20%, #300c42 0%, #11051f 50%, #08020e 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 40px 30px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+      text-align: center;
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .icon-top {
+      font-size: 50px;
+      color: var(--pink-neon);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #ffffff, #ffb3d9);
+      -webkit-background-clip: text;
+      -webkit-fill-color: transparent;
+    }
+
+    .content-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 20px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 25px;
+      text-align: justify;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 26px;
+      background: linear-gradient(90deg, var(--pink-neon), var(--purple-primary));
+      color: #fff;
+      text-decoration: none;
+      border-radius: 14px;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(255, 42, 133, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(138, 43, 226, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="icon-top">
+      <i class="fa-solid fa-layer-group"></i>
+    </div>
+
+    <h1>بەخێربێیت بۆ پەڕەی نوێ</h1>
+
+    <div class="content-box">
+      لێرەدا دەتوانیت هەر زانیاری، کتێبخانەی ئەندازیاری، خزمەتگوزاری، یان ڕوونکردنەوەیەک کە تایبەت بێت بە بونیاد فاوندەیشن زیاد بکەیت و پیشانی فێرخوازانی بدەیت.
+    </div>
+
+    <a href="index.html" class="btn-back">
+      <i class="fa-solid fa-arrow-right"></i> گەڕانەوە بۆ لاپەڕەی سەرەکی
+    </a>
+  </div>
+
+</body>
+</html>
