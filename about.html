@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پەڕەی نوێ | بونیاد فاوندەیشن</title>
+  <title>بونیاد فاوندەیشن | پەڕەی نوێ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
       --bg-dark: #120b22;
       --purple-primary: #8a2be2;
       --pink-neon: #ff2a85;
+      --pink-soft: #ff758c;
       --glass-bg: rgba(255, 255, 255, 0.08);
       --glass-border: rgba(255, 255, 255, 0.18);
     }
@@ -33,6 +34,29 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .blueprint-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 42, 133, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(138, 43, 226, 0.08) 1px, transparent 1px);
+      background-size: 35px 35px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 650px;
     }
 
     .card {
@@ -41,23 +65,41 @@
       -webkit-backdrop-filter: blur(25px);
       border: 1px solid var(--glass-border);
       border-radius: 28px;
-      padding: 40px 30px;
+      padding: 30px 24px;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
       text-align: center;
-      max-width: 520px;
+    }
+
+    /* سلایدەری دوو وێنەکە لە سەرەوە */
+    .slider-box {
+      position: relative;
       width: 100%;
+      height: 230px;
+      margin-bottom: 25px;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
-    .icon-top {
-      font-size: 50px;
-      color: var(--pink-neon);
-      margin-bottom: 20px;
+    .slider-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s ease-in-out;
     }
 
-    h1 {
+    .slider-track img {
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .page-title {
       font-size: 24px;
       font-weight: 800;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       background: linear-gradient(90deg, #ffffff, #ffb3d9);
       -webkit-background-clip: text;
       -webkit-fill-color: transparent;
@@ -69,7 +111,7 @@
       border-radius: 16px;
       padding: 20px;
       font-size: 15px;
-      line-height: 1.8;
+      line-height: 1.9;
       color: rgba(255, 255, 255, 0.9);
       margin-bottom: 25px;
       text-align: justify;
@@ -78,13 +120,15 @@
     .btn-back {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
-      padding: 12px 26px;
+      padding: 12px 28px;
       background: linear-gradient(90deg, var(--pink-neon), var(--purple-primary));
       color: #fff;
       text-decoration: none;
       border-radius: 14px;
       font-weight: 700;
+      font-size: 15px;
       box-shadow: 0 10px 20px rgba(255, 42, 133, 0.35);
       transition: all 0.3s ease;
     }
@@ -97,21 +141,44 @@
 </head>
 <body>
 
-  <div class="card">
-    <div class="icon-top">
-      <i class="fa-solid fa-layer-group"></i>
+  <div class="blueprint-grid"></div>
+
+  <div class="container">
+    <div class="card">
+      
+      <!-- بەشی سلایدەری جووڵاوی دوو وێنەکە لە سەرەوە -->
+      <div class="slider-box">
+        <div id="newSliderTrack" class="slider-track">
+          <img src="slide1.jpg" alt="وێنەی یەکەم">
+          <img src="slide2.jpg" alt="وێنەی دووەم">
+        </div>
+      </div>
+
+      <h1 class="page-title">پڕۆژەی بونیاد فاوندەیشن</h1>
+
+      <div class="content-box">
+        بەخێربێیت بۆ ئەم بەشە نوێیە. لێرەدا دەتوانیت سەرچاوەکان، زانیارییە تایبەتەکان، یان هەر بەشێکی گرنگی ئەندازیاری کە دەتەوێت زیادی بکەیت بۆ فێرخوازان و سەردانکەران.
+      </div>
+
+      <!-- دوگمەی گەڕانەوە بۆ لاپەڕەی سەرەکی -->
+      <a href="index.html" class="btn-back">
+        <i class="fa-solid fa-arrow-right"></i> گەڕانەوە بۆ ماڵەوە
+      </a>
+
     </div>
-
-    <h1>بەخێربێیت بۆ پەڕەی نوێ</h1>
-
-    <div class="content-box">
-      لێرەدا دەتوانیت هەر زانیاری، کتێبخانەی ئەندازیاری، خزمەتگوزاری، یان ڕوونکردنەوەیەک کە تایبەت بێت بە بونیاد فاوندەیشن زیاد بکەیت و پیشانی فێرخوازانی بدەیت.
-    </div>
-
-    <a href="index.html" class="btn-back">
-      <i class="fa-solid fa-arrow-right"></i> گەڕانەوە بۆ لاپەڕەی سەرەکی
-    </a>
   </div>
+
+  <!-- سکریپتی جووڵەی وێنەکان (هەر ۳ چرکە جارێک دەگۆڕێت) -->
+  <script>
+    let currentStep = 0;
+    setInterval(() => {
+      const track = document.getElementById('newSliderTrack');
+      if (track) {
+        currentStep = currentStep === 0 ? 1 : 0;
+        track.style.transform = `translateX(-${currentStep * 100}%)`;
+      }
+    }, 3000);
+  </script>
 
 </body>
 </html>
