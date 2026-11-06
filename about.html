@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بونیاد فاوندەیشن | پەڕەی نوێ</title>
+  <title>بۆردی سەرچاوە ئەندازیارییەکان | بونیاد فاوندەیشن</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
@@ -11,12 +11,12 @@
 
   <style>
     :root {
-      --bg-dark: #120b22;
+      --bg-dark: #0f071a;
       --purple-primary: #8a2be2;
       --pink-neon: #ff2a85;
-      --pink-soft: #ff758c;
-      --glass-bg: rgba(255, 255, 255, 0.08);
-      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass-bg: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --card-hover: rgba(255, 255, 255, 0.12);
     }
 
     * {
@@ -27,157 +27,308 @@
     }
 
     body {
-      background: radial-gradient(circle at 15% 20%, #300c42 0%, #11051f 50%, #08020e 100%);
+      background: radial-gradient(circle at 20% 15%, #2a0845 0%, #0d041a 60%, #05010a 100%);
       color: #fff;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      padding: 30px 15px;
       position: relative;
-      overflow-x: hidden;
     }
 
-    .blueprint-grid {
-      position: absolute;
+    /* پاشبنەمای ئەندازیاری */
+    .grid-pattern {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background-image: 
-        linear-gradient(rgba(255, 42, 133, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(138, 43, 226, 0.08) 1px, transparent 1px);
-      background-size: 35px 35px;
+        linear-gradient(rgba(255, 42, 133, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(138, 43, 226, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
       pointer-events: none;
+      z-index: 0;
+    }
+
+    .main-wrapper {
+      position: relative;
       z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    .container {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 650px;
-    }
-
-    .card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid var(--glass-border);
-      border-radius: 28px;
-      padding: 30px 24px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
-      text-align: center;
-    }
-
-    /* سلایدەری دوو وێنەکە لە سەرەوە */
-    .slider-box {
+    /* بەشی سلایدەری سەرەوە بە قەبارەی گەورە */
+    .hero-slider-container {
       position: relative;
       width: 100%;
-      height: 230px;
-      margin-bottom: 25px;
+      height: 340px;
+      border-radius: 26px;
       overflow: hidden;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-bottom: 40px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     }
 
-    .slider-track {
-      display: flex;
+    .slide-item {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      transition: transform 0.8s ease-in-out;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
     }
 
-    .slider-track img {
-      min-width: 100%;
+    .slide-item.active {
+      opacity: 1;
+    }
+
+    .slide-item img {
+      width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
-    .page-title {
+    .slider-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 7, 26, 0.1) 0%, rgba(15, 7, 26, 0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+    }
+
+    .slider-overlay h1 {
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.7);
+    }
+
+    .slider-overlay p {
+      color: #e0d0f5;
+      font-size: 15px;
+      margin-top: 6px;
+    }
+
+    /* سەردێڕی بەشەکان */
+    .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-header h2 {
       font-size: 24px;
       font-weight: 800;
-      margin-bottom: 12px;
-      background: linear-gradient(90deg, #ffffff, #ffb3d9);
+      background: linear-gradient(90deg, #fff, #ff8dc7);
       -webkit-background-clip: text;
       -webkit-fill-color: transparent;
+      display: inline-block;
     }
 
-    .content-box {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px dashed rgba(255, 255, 255, 0.2);
-      border-radius: 16px;
-      padding: 20px;
-      font-size: 15px;
-      line-height: 1.9;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 25px;
-      text-align: justify;
+    /* تۆڕی کاردەکان (Grid) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 22px;
+      margin-bottom: 45px;
     }
 
-    .btn-back {
+    .feature-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      background: var(--card-hover);
+      border-color: rgba(255, 42, 133, 0.5);
+      box-shadow: 0 18px 40px rgba(255, 42, 133, 0.25);
+    }
+
+    .card-icon {
+      width: 75px;
+      height: 75px;
+      margin: 0 auto 18px auto;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      background: linear-gradient(135deg, rgba(255, 42, 133, 0.2), rgba(138, 43, 226, 0.2));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ff8dc7;
+    }
+
+    .feature-card h3 {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .card-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 12px 28px;
-      background: linear-gradient(90deg, var(--pink-neon), var(--purple-primary));
-      color: #fff;
+      gap: 8px;
+      padding: 11px 18px;
+      border-radius: 12px;
       text-decoration: none;
-      border-radius: 14px;
       font-weight: 700;
-      font-size: 15px;
-      box-shadow: 0 10px 20px rgba(255, 42, 133, 0.35);
-      transition: all 0.3s ease;
+      font-size: 14px;
+      color: #fff;
+      background: linear-gradient(90deg, var(--pink-neon), var(--purple-primary));
+      box-shadow: 0 8px 18px rgba(255, 42, 133, 0.3);
+      transition: opacity 0.3s ease;
     }
 
-    .btn-back:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 30px rgba(138, 43, 226, 0.5);
+    .card-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* دوگمەی گەڕانەوە لە خوارەوە */
+    .back-container {
+      text-align: center;
+      margin-top: 20px;
+      padding-bottom: 30px;
+    }
+
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      color: #fff;
+      padding: 13px 30px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    .home-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: #ff2a85;
     }
   </style>
 </head>
 <body>
 
-  <div class="blueprint-grid"></div>
+  <div class="grid-pattern"></div>
 
-  <div class="container">
-    <div class="card">
-      
-      <!-- بەشی سلایدەری جووڵاوی دوو وێنەکە لە سەرەوە -->
-      <div class="slider-box">
-        <div id="newSliderTrack" class="slider-track">
-          <img src="slide1.jpg" alt="وێنەی یەکەم">
-          <img src="slide2.jpg" alt="وێنەی دووەم">
+  <div class="main-wrapper">
+
+    <!-- ١. سلایدەری دوو وێنەکە لە سەرەوە بە فەیدینی ئۆتۆماتیک -->
+    <div class="hero-slider-container">
+      <div class="slide-item active">
+        <img src="slide1.jpg" alt="وێنەی یەکەم">
+      </div>
+      <div class="slide-item">
+        <img src="slide2.jpg" alt="وێنەی دووەم">
+      </div>
+      <div class="slider-overlay">
+        <h1>سەرچاوە و بەشە زانستییەکانی بونیاد</h1>
+        <p>دەستگەیشتن بە نوێترین کتێب، وانە و کەرەستە ئەندازیارییەکان</p>
+      </div>
+    </div>
+
+    <!-- ٢. بەشی سەردێڕ -->
+    <div class="section-header">
+      <h2>بەشە سەرەکییەکان</h2>
+    </div>
+
+    <!-- ٣. تۆڕی چوار بەشە گرنگەکە -->
+    <div class="cards-grid">
+
+      <!-- بەشی یەکەم: کتێبەکان -->
+      <div class="feature-card">
+        <div>
+          <div class="card-icon">
+            <i class="fa-solid fa-book-bookmark"></i>
+          </div>
+          <h3>بەشی کتێبەکان</h3>
+          <p>کۆمەڵێک لە باشترین و نوێترین کتێب و سەرچاوە فەرمییە ئەندازیارییەکان بۆ خوێندکاران.</p>
         </div>
+        <a href="#" class="card-btn">بینینی کتێبەکان <i class="fa-solid fa-arrow-left"></i></a>
       </div>
 
-      <h1 class="page-title">پڕۆژەی بونیاد فاوندەیشن</h1>
-
-      <div class="content-box">
-        بەخێربێیت بۆ ئەم بەشە نوێیە. لێرەدا دەتوانیت سەرچاوەکان، زانیارییە تایبەتەکان، یان هەر بەشێکی گرنگی ئەندازیاری کە دەتەوێت زیادی بکەیت بۆ فێرخوازان و سەردانکەران.
+      <!-- بەشی دووەم: کۆرسەکان -->
+      <div class="feature-card">
+        <div>
+          <div class="card-icon">
+            <i class="fa-solid fa-chalkboard-user"></i>
+          </div>
+          <h3>بەشی کۆرسەکان</h3>
+          <p>کۆرس و ڕاهێنانی پراکتیکی لەسەر نەرمەکاڵاکان و زانستی بیناسازی و پڕۆژەکان.</p>
+        </div>
+        <a href="#" class="card-btn">چوونە ناو کۆرسەکان <i class="fa-solid fa-arrow-left"></i></a>
       </div>
 
-      <!-- دوگمەی گەڕانەوە بۆ لاپەڕەی سەرەکی -->
-      <a href="index.html" class="btn-back">
-        <i class="fa-solid fa-arrow-right"></i> گەڕانەوە بۆ ماڵەوە
-      </a>
+      <!-- بەشی سێیەم: تەلارسازی -->
+      <div class="feature-card">
+        <div>
+          <div class="card-icon">
+            <i class="fa-solid fa-compass-drafting"></i>
+          </div>
+          <h3>ئەندازیاری تەلارسازی</h3>
+          <p>کەرەستە و پێداویستییەکانی نەخشەکێشان، دیزاینی بینا و مۆدێلەکانی تەلارسازی.</p>
+        </div>
+        <a href="#" class="card-btn">کەرەستەی تەلارسازی <i class="fa-solid fa-arrow-left"></i></a>
+      </div>
+
+      <!-- بەشی چوارەم: شارستانی قۆناغی یەکەم -->
+      <div class="feature-card">
+        <div>
+          <div class="card-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <h3>شارستانی - قۆناغی ١</h3>
+          <p>مەنهەج، وانەکان، تاقیکردنەوەکان و کەرەستەکانی تایبەت بە مەرحەلەی یەکەمی شارستانی.</p>
+        </div>
+        <a href="#" class="card-btn">وانەکانی قۆناغی یەک <i class="fa-solid fa-arrow-left"></i></a>
+      </div>
 
     </div>
+
+    <!-- ٤. دوگمەی گەڕانەوە بۆ لاپەڕەی سەرەکی -->
+    <div class="back-container">
+      <a href="index.html" class="home-btn">
+        <i class="fa-solid fa-house"></i> گەڕانەوە بۆ لاپەڕەی سەرەکی
+      </a>
+    </div>
+
   </div>
 
-  <!-- سکریپتی جووڵەی وێنەکان (هەر ۳ چرکە جارێک دەگۆڕێت) -->
+  <!-- سکریپتی گۆڕینی دوو وێنەکە بە فەیدین هەموو ٣.٥ چرکە جارێک -->
   <script>
-    let currentStep = 0;
+    const slides = document.querySelectorAll('.slide-item');
+    let currentIndex = 0;
+
     setInterval(() => {
-      const track = document.getElementById('newSliderTrack');
-      if (track) {
-        currentStep = currentStep === 0 ? 1 : 0;
-        track.style.transform = `translateX(-${currentStep * 100}%)`;
-      }
-    }, 3000);
+      slides[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % slides.length;
+      slides[currentIndex].classList.add('active');
+    }, 3500);
   </script>
 
 </body>
