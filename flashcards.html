@@ -1,1 +1,345 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فلاشکارتی ئەندازیاری - پلاتفۆرمی بونیاد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --card-front: #161f30;
+            --card-back: #1e293b;
+            --accent-cyan: #00f2fe;
+            --accent-blue: #4facfe;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 16px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            color: var(--accent-cyan);
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* ستایلی فلاشکارت لە کاتی گەڕانەوە (3D Flip) */
+        .card-container {
+            perspective: 1000px;
+            height: 220px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 16px;
+        }
+
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* دیوی پێشەوە */
+        .card-front {
+            background: linear-gradient(145deg, var(--card-front), #101623);
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            direction: ltr;
+        }
+
+        .term-badge {
+            background: rgba(0, 242, 254, 0.15);
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .audio-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .audio-btn:hover {
+            background: var(--accent-blue);
+        }
+
+        .english-term {
+            text-align: center;
+            direction: ltr;
+        }
+
+        .english-term h2 {
+            font-size: 1.8rem;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .flip-hint {
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.75rem;
+        }
+
+        /* دیوی پشتەوە */
+        .card-back {
+            background: linear-gradient(145deg, var(--card-back), #131a26);
+            transform: rotateY(180deg);
+            border-color: rgba(79, 172, 254, 0.3);
+        }
+
+        .kurdish-meaning {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 8px;
+        }
+
+        .scientific-concept {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .exam-context {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            direction: ltr;
+            text-align: left;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .back-nav {
+            margin-top: 24px;
+            text-decoration: none;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .back-nav:hover {
+            color: var(--accent-cyan);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>فلاشکارتی ئەندازیاری بونیاد</h1>
+        <p>پەنجە لە کارتەکە بدە بۆ بینینی مانا و بەکارهێنانی لە تاقیکردنەوەدا</p>
+    </div>
+
+    <div class="container">
+
+        <!-- کارتی ١: Tension -->
+        <div class="card-container" onclick="toggleCard(this)">
+            <div class="card-inner">
+                <div class="card-face card-front">
+                    <div class="top-row">
+                        <span class="term-badge">Mechanics / Materials</span>
+                        <button class="audio-btn" onclick="speakTerm(event, 'Tension')">🔊</button>
+                    </div>
+                    <div class="english-term">
+                        <h2>Tension</h2>
+                    </div>
+                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="kurdish-meaning">فشاری کێشکردن (ڕاکێشان)</div>
+                    <div class="scientific-concept">هێزێکە کە کار لەسەر ماددەکە دەکات بە ئاراستەی دەرەوە و هەوڵی درێژکردنەوە و ڕاکێشانی دەدات (وەک شیشی ئاسن لە کاتی چەمانەوەدا).</div>
+                    <div class="exam-context">
+                        <strong>Exam prompt:</strong> "Determine the tension force in cable AB..."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- کارتی ٢: Compression -->
+        <div class="card-container" onclick="toggleCard(this)">
+            <div class="card-inner">
+                <div class="card-face card-front">
+                    <div class="top-row">
+                        <span class="term-badge">Mechanics / Materials</span>
+                        <button class="audio-btn" onclick="speakTerm(event, 'Compression')">🔊</button>
+                    </div>
+                    <div class="english-term">
+                        <h2>Compression</h2>
+                    </div>
+                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="kurdish-meaning">فشاری پەستاندن (گوشین)</div>
+                    <div class="scientific-concept">هێزێکە بەرەو ناوەوەی ماددەکە کار دەکات و هەوڵی بچووککردنەوە یان پانکردنەوەی قەبارەکەی دەدات (وەک کۆڵەکەی کۆنکرێتی).</div>
+                    <div class="exam-context">
+                        <strong>Exam prompt:</strong> "Calculate the maximum compressive stress in the column..."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- کارتی ٣: Shear Stress -->
+        <div class="card-container" onclick="toggleCard(this)">
+            <div class="card-inner">
+                <div class="card-face card-front">
+                    <div class="top-row">
+                        <span class="term-badge">Strength of Materials</span>
+                        <button class="audio-btn" onclick="speakTerm(event, 'Shear Stress')">🔊</button>
+                    </div>
+                    <div class="english-term">
+                        <h2>Shear Stress</h2>
+                    </div>
+                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="kurdish-meaning">فشاری بڕین (لەتکردن)</div>
+                    <div class="scientific-concept">فشارێکە کاتێک دروست دەبێت کە دوو هێزی هاوتەریب و پێچەوانە هەوڵ بدەن چینەکانی ماددەکە بەسەر یەکتردا بخشێنن و بیبڕن.</div>
+                    <div class="exam-context">
+                        <strong>Exam prompt:</strong> "Find the average shear stress acting on the bolt..."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- کارتی ٤: Bending Moment -->
+        <div class="card-container" onclick="toggleCard(this)">
+            <div class="card-inner">
+                <div class="card-face card-front">
+                    <div class="top-row">
+                        <span class="term-badge">Structural Analysis</span>
+                        <button class="audio-btn" onclick="speakTerm(event, 'Bending Moment')">🔊</button>
+                    </div>
+                    <div class="english-term">
+                        <h2>Bending Moment</h2>
+                    </div>
+                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="kurdish-meaning">مۆمێنتی چەمانەوە</div>
+                    <div class="scientific-concept">کاریگەریی ئەو هێز و مۆمێنتانەیە کە دەبنە هۆی چەمانەوەی تیر یان پێکهاتە ئەندازیارییەکە (Beam) لە ژێر باردا.</div>
+                    <div class="exam-context">
+                        <strong>Exam prompt:</strong> "Draw the shear force and bending moment diagrams for the beam..."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- کارتی ٥: Deflection -->
+        <div class="card-container" onclick="toggleCard(this)">
+            <div class="card-inner">
+                <div class="card-face card-front">
+                    <div class="top-row">
+                        <span class="term-badge">Structural Mechanics</span>
+                        <button class="audio-btn" onclick="speakTerm(event, 'Deflection')">🔊</button>
+                    </div>
+                    <div class="english-term">
+                        <h2>Deflection</h2>
+                    </div>
+                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="kurdish-meaning">داکەوتن / لادانی ستوونی</div>
+                    <div class="scientific-concept">ئەو دوورییە ستوونییەیە کە تەنێک یان سەقفێک بەهۆی کێش یان بارەوە لە شوێنی بنەڕەتیی خۆی بەرەو خوارەوە دادەبەزێت.</div>
+                    <div class="exam-context">
+                        <strong>Exam prompt:</strong> "Compute the maximum deflection at the midpoint..."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back-nav">← گەڕانەوە بۆ لاپەڕەی سەرەکی</a>
+
+    <script>
+        function toggleCard(container) {
+            container.classList.toggle('flipped');
+        }
+
+        function speakTerm(event, text) {
+            event.stopPropagation(); // ڕێگری دەکات لە هەڵگەڕانەوەی کارت لە کاتی لێدانی دوگمەی دەنگ
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85; // کەمێک لەسەرخۆ دەیخوێنێتەوە بۆ فێربوون
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('سیستەمی دەنگ لەم وێبگەڕەدا کارا نییە');
+            }
+        }
+    </script>
+</body>
+</html>
 
