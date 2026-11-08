@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ئینگلیزی بۆ ئەندازیاری - پلاتفۆرمی بونیاد</title>
+    <title>فلاشکارتی ئەندازیاری - پلاتفۆرمی بونیاد</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #0b0719;
             --card-front: #16102b;
-            --card-back: #21133e;
+            --card-back: #1d1135;
             --card-border: rgba(255, 255, 255, 0.1);
             --primary-gradient: linear-gradient(135deg, #e024c3, #7e22ce);
             --accent-glow: rgba(224, 36, 195, 0.35);
@@ -34,7 +34,7 @@
             background-size: 30px 30px;
             color: var(--text-main);
             min-height: 100vh;
-            padding: 16px 16px 50px;
+            padding: 16px 16px 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -51,11 +51,10 @@
         .engineering-banner {
             position: relative;
             width: 100%;
-            height: 180px;
-            border-radius: 22px;
+            height: 170px;
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid var(--card-border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: flex-end;
             padding: 18px;
@@ -69,7 +68,7 @@
             height: 100%;
             object-fit: cover;
             z-index: 1;
-            filter: brightness(0.75);
+            filter: brightness(0.7);
         }
 
         .banner-overlay {
@@ -78,7 +77,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(11, 7, 25, 0.95) 20%, rgba(11, 7, 25, 0.3) 70%, transparent);
+            background: linear-gradient(to top, rgba(11, 7, 25, 0.95) 20%, transparent 80%);
             z-index: 2;
         }
 
@@ -99,15 +98,14 @@
             border-radius: 12px;
             font-size: 0.75rem;
             color: #f472b6;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-weight: 700;
         }
 
         .banner-content h1 {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 900;
             color: #ffffff;
-            margin-bottom: 2px;
         }
 
         .banner-content p {
@@ -116,7 +114,7 @@
         }
 
         .stage-box {
-            background: linear-gradient(135deg, rgba(224, 36, 195, 0.12), rgba(126, 34, 206, 0.12));
+            background: linear-gradient(135deg, rgba(224, 36, 195, 0.15), rgba(126, 34, 206, 0.15));
             border: 1px solid rgba(224, 36, 195, 0.35);
             border-radius: 18px;
             padding: 14px 16px;
@@ -128,7 +126,7 @@
         .stage-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .stage-icon {
@@ -222,23 +220,23 @@
         .cards-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
         }
 
         .fc-item {
             perspective: 1000px;
             width: 100%;
-            height: 120px;
+            min-height: 240px;
             cursor: pointer;
         }
 
         .fc-inner {
             position: relative;
             width: 100%;
-            height: 100%;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 240px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
-            border-radius: 18px;
+            border-radius: 20px;
         }
 
         .fc-item.flipped .fc-inner {
@@ -250,13 +248,13 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 18px;
+            border-radius: 20px;
             padding: 16px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             border: 1px solid var(--card-border);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .fc-front {
@@ -266,59 +264,38 @@
         .fc-back {
             background: var(--card-back);
             transform: rotateY(180deg);
-            border-color: rgba(224, 36, 195, 0.4);
+            border-color: rgba(224, 36, 195, 0.45);
         }
 
-        .word-info {
+        .card-top {
             display: flex;
-            flex-direction: column;
-            gap: 3px;
-            text-align: left;
+            justify-content: space-between;
+            align-items: center;
             direction: ltr;
         }
 
-        .word-info .en-word {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .word-info .cat-tag {
+        .cat-tag {
             font-size: 0.72rem;
             color: #f472b6;
             font-weight: 700;
             text-transform: uppercase;
-        }
-
-        .meaning-info {
-            text-align: right;
-            direction: rtl;
-            width: 100%;
-        }
-
-        .meaning-info .ku-word {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #38bdf8;
-            margin-bottom: 2px;
-        }
-
-        .meaning-info .hint {
-            font-size: 0.75rem;
-            color: var(--text-sub);
+            background: rgba(224, 36, 195, 0.15);
+            padding: 4px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(224, 36, 195, 0.3);
         }
 
         .sound-btn {
             background: rgba(255, 255, 255, 0.08);
             border: none;
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #f472b6;
-            font-size: 1.05rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -326,6 +303,73 @@
         .sound-btn:active {
             transform: scale(0.9);
             background: rgba(224, 36, 195, 0.3);
+        }
+
+        .front-visual {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            direction: ltr;
+            margin: 12px 0;
+        }
+
+        .word-img {
+            width: 82px;
+            height: 82px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .en-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        .tap-hint {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .back-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .ku-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #38bdf8;
+        }
+
+        .meaning-desc {
+            font-size: 0.84rem;
+            color: #e5e7eb;
+            line-height: 1.5;
+        }
+
+        .exam-box {
+            background: rgba(0, 0, 0, 0.35);
+            border-right: 3px solid #e024c3;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.45;
+        }
+
+        .exam-box b {
+            color: #f472b6;
         }
 
         .back-nav {
@@ -371,7 +415,7 @@
                 </div>
                 <div class="stage-text">
                     <h2>ئەندازیاری شارستانی - قۆناغی ١</h2>
-                    <span>سەرجەم وانە و زاراوە سەرەکییەکان</span>
+                    <span>فەرهەنگ، وێنە و شێوازی تاقیکردنەوە</span>
                 </div>
             </div>
             <span style="font-size: 0.8rem; color: #f472b6; font-weight: 700;">فەرهەنگ</span>
@@ -406,61 +450,170 @@
 
     <script>
         const flashcardsData = [
-            // ١. کەرەستەکانی بیناسازی (Building Material)
-            { en: "Compressive Strength", ku: "هێزی بەرگری بۆ چوونەوەیەک (پەستان)", cat: "materials", sub: "Building Material" },
-            { en: "Tensile Strength", ku: "هێزی ڕاکێشان و کشان", cat: "materials", sub: "Building Material" },
-            { en: "Curing", ku: "ئاوڕشێنکردنی کۆنکرێت", cat: "materials", sub: "Building Material" },
-            { en: "Bulk Density", ku: "چڕیی ماددە بە بۆشایی و کونەکانیەوە", cat: "materials", sub: "Building Material" },
-            { en: "Admixture", ku: "ئاوێتە (ماددەی کیمیایی زیادکراو)", cat: "materials", sub: "Building Material" },
-            { en: "Mortar", ku: "مۆنە (پێکهاتوو لە لم، ئاو و چیمەنتۆ)", cat: "materials", sub: "Building Material" },
-            { en: "Elastic Deformation", ku: "شێواندنێک دەتوانێت بگەڕێتەوە شوێنی خۆی", cat: "materials", sub: "Building Material" },
-            { en: "Plastic Deformation", ku: "شێواندنێک ناتوانێت بگەڕێتەوە شوێنی خۆی", cat: "materials", sub: "Building Material" },
-            { en: "Durability", ku: "خۆگری، قایمی و بەرگەگرتن", cat: "materials", sub: "Building Material" },
-            { en: "Aggregate", ku: "چەو و لم", cat: "materials", sub: "Building Material" },
+            // ١. کەرەستەکانی بیناسازی (Building Materials)
+            {
+                en: "Compressive Strength",
+                ku: "هێزی بەرگری بۆ چوونەوەیەک (پەستان)",
+                cat: "materials",
+                sub: "Building Material",
+                img: "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=300&q=80",
+                desc: "توانای بەرگەگرتنی کۆنکرێت یان کەرەستە لە دژی هێزێک کە دەیکۆشێت و پەستانی دەخاتە سەر.",
+                exam: "لە تاقیکردنەوەدا بە زۆری داوای پێوانەکردنی دەکرێت دوای ٢٨ ڕۆژ لە تاقیگە (Crushing test) یان بەراوردکردنی لەگەڵ Tensile."
+            },
+            {
+                en: "Tensile Strength",
+                ku: "هێزی ڕاکێشان و کشان",
+                cat: "materials",
+                sub: "Building Material",
+                img: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&w=300&q=80",
+                desc: "توانای بەرگەگرتنی ماددەکە لە دژی هێزی ڕاکێشان بەرەو دەرەوە پێش ئەوەی درز بەرێت یان بپچڕێت.",
+                exam: "زۆرجار دەپرسرێت: بۆچی شیش (Steel Reinforcement) لە کۆنکرێت دادەنرێت؟ وەڵامەکەی پەیوەستە بە لاوازی کۆنکرێت لە Tensile strength دا."
+            },
+            {
+                en: "Curing",
+                ku: "ئاوڕشێنکردنی کۆنکرێت",
+                cat: "materials",
+                sub: "Building Material",
+                img: "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f9?auto=format&fit=crop&w=300&q=80",
+                desc: "پاراستنی شێداری و پلەی گەرمیی کۆنکرێتە لە ماوەی سەرەتای ڕەقبوونیدا تا بەهێزیی تەواو بەدەستبهێنێت.",
+                exam: "لە پرسیارە کورتەکاندا دێت وەک: 'What is the purpose of curing?' بۆ پاراستنی شێ و گەیشتن بە ئەوپەڕی بەرگری."
+            },
+            {
+                en: "Mortar",
+                ku: "مۆنە (تێکەڵەی چیمەنتۆ، لم و ئاو)",
+                cat: "materials",
+                sub: "Building Material",
+                img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=300&q=80",
+                desc: "ئەو هەویرە لکێنەرەیە کە لە چیمەنتۆ و لم و ئاو دروست دەکرێت بۆ پێکەوەبەستنی خشت یان بلۆک.",
+                exam: "لە تاقیکردنەوەدا دەپرسرێت: 'Differentiate between concrete and mortar' جیاوازییەکەی نەبوونی Gravel (چەو)ـە لە مۆنەدا."
+            },
+            {
+                en: "Elastic Deformation",
+                ku: "شێواندنی کاتی (جیڕی)",
+                cat: "materials",
+                sub: "Building Material",
+                img: "https://images.unsplash.com/photo-1533158307587-828f0a76ef46?auto=format&fit=crop&w=300&q=80",
+                desc: "گۆڕانی شێوەی ماددە کاتێک هێزی دەخرێتە سەر، و دەگەڕێتەوە باری سەرەتایی خۆی بە لابردنی هێزەکە.",
+                exam: "پەیوەستە بە یاسای هۆک (Hooke's Law)، و لە وێنەی هێڵکاریی Stress-Strain دا داوا دەکرێت دیاری بکرێت."
+            },
+            {
+                en: "Plastic Deformation",
+                ku: "شێواندنی هەمیشەیی",
+                cat: "materials",
+                sub: "Building Material",
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80",
+                desc: "شێواندن و درێژبوونێک کە دوای لابردنی هێزەکە ماددەکە ناگەڕێتەوە شێوەی بنەڕەتی خۆی.",
+                exam: "لە پرسیاری تاقیکردنەوەدا دوای خاڵی Yield Point دەست پێدەکات و هۆکاری سەرەکیی شکان یان لەکارکەوتنە."
+            },
 
             // ٢. میکانیکی ئەندازیاری (Engineering Mechanics)
-            { en: "Equilibrium", ku: "هاوسەنگی", cat: "mechanics", sub: "Mechanics" },
-            { en: "Resultant", ku: "دەرئەنجام (سەرجەمی هێزەکان)", cat: "mechanics", sub: "Mechanics" },
-            { en: "Moment of Inertia", ku: "زەبری بارنەگۆڕی", cat: "mechanics", sub: "Mechanics" },
-            { en: "Center of Gravity", ku: "ناوەندی کێشکردن (چەقی قورسایی)", cat: "mechanics", sub: "Mechanics" },
-            { en: "Normal Force", ku: "هێزی ئەستوون", cat: "mechanics", sub: "Mechanics" },
-            { en: "Coefficient of Friction", ku: "هاوکۆلکەی لێکخشاندن", cat: "mechanics", sub: "Mechanics" },
-            { en: "Torque", ku: "زەبر (خولانەوە)", cat: "mechanics", sub: "Mechanics" },
-            { en: "Coplanar", ku: "لە یەک ڕووتەختدا (2D)", cat: "mechanics", sub: "Mechanics" },
+            {
+                en: "Equilibrium",
+                ku: "هاوسەنگیی هێزەکان",
+                cat: "mechanics",
+                sub: "Mechanics",
+                img: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=300&q=80",
+                desc: "دۆخێکە کە سەرجەمی هەموو هێزەکان و زەبرەکان (Moments) یەکسانن بە سفر (ΣFx=0, ΣFy=0, ΣM=0).",
+                exam: "بنچینەی سەرجەم پرسیارەکانی شیکارکردنی میکانیک و دۆزینەوەی کاردانەوەکانە (Reactions at supports)."
+            },
+            {
+                en: "Resultant Force",
+                ku: "هێزی دەرئەنجام (سەرجەم)",
+                cat: "mechanics",
+                sub: "Mechanics",
+                img: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=300&q=80",
+                desc: "تەنها یەک هێزە کە هەمان کاریگەریی کۆمەڵە هێزێکی جیاواز لەسەر تەنەکە دروست دەکات.",
+                exam: "بە شێوازی 'Determine the magnitude and direction of the resultant' لە تاقیکردنەوەکاندا دێتەوە."
+            },
+            {
+                en: "Moment of Inertia",
+                ku: "زەبری بارنەگۆڕی",
+                cat: "mechanics",
+                sub: "Mechanics",
+                img: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=300&q=80",
+                desc: "بەرگریی تەن یان پەڕەی ئەندازیارییە لە دژی چەمانەوە و سووڕانەوە لە دەوری تەوەرێکدا (I = ∫y² dA).",
+                exam: "پێویستە هاوکێشەی لاکێشە لەبەر بێت: (I = bh³/12) چونکە لە زۆربەی مەسەلەکانی مەرحەلە یەک بەکاردێت."
+            },
+            {
+                en: "Center of Gravity",
+                ku: "ناوەندی کێشکردن (چەقی قورسایی)",
+                cat: "mechanics",
+                sub: "Mechanics",
+                img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=80",
+                desc: "ئەو خاڵەیە کە وا دادەنرێت سەرجەمی کێشی تەنەکە لەوێدا کۆبووەتەوە و کێشی دەکەوێتە سەر.",
+                exam: "لە پرسیارەکان بە شێوازی دۆزینەوەی پۆتانی (X̄, Ȳ) بۆ شێوە ئاوێتەکان (Composite bodies) دێت."
+            },
 
             // ٣. جیۆلۆجی ئەندازیاری (Engineering Geology)
-            { en: "Igneous Rocks", ku: "بەردی ئاگرین", cat: "geology", sub: "Geology" },
-            { en: "Sedimentary Rocks", ku: "بەردی نیشتوو", cat: "geology", sub: "Geology" },
-            { en: "Metamorphic Rocks", ku: "بەردی گۆڕاو", cat: "geology", sub: "Geology" },
-            { en: "Weathering", ku: "گۆڕانی بەرد لەژێر کاریگەری کەشوهەوا", cat: "geology", sub: "Geology" },
-            { en: "Faults", ku: "درزی تایبەتی ناو چینە بەردەکان", cat: "geology", sub: "Geology" },
-            { en: "Aquifer", cat: "geology", ku: "ئاوی ژێرزەوی", sub: "Geology" },
-            { en: "Earth Crust", ku: "توێکڵی ڕەقی زەوی", cat: "geology", sub: "Geology" },
+            {
+                en: "Weathering",
+                ku: "گۆڕان و داخورانی بەرد بە کەشوهەوا",
+                cat: "geology",
+                sub: "Geology",
+                img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=300&q=80",
+                desc: "تێکشکاندن و گۆڕانی بەردەکانە لەسەر ڕووی زەوی بەهۆی ئاو، با، پلەی گەرمی یان کرداری کیمیایی.",
+                exam: "پرسیار دەکرێت لەسەر دوو جۆرەکەی: جیاوازی نێوان Mechanical weathering و Chemical weathering."
+            },
+            {
+                en: "Aquifer",
+                ku: "چینی ئاوی ژێرزەوی",
+                cat: "geology",
+                sub: "Geology",
+                img: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=300&q=80",
+                desc: "چینێکی بەردین یان لمییە کە دەتوانێت بڕێکی باشی ئاو لە خۆیدا کۆبکاتەوە و ئاو پێیدا تێپەڕێت.",
+                exam: "لە تاقیکردنەوەدا پەیوەستە بە شیکاری دروستکردنی بناغە و پێویستیی لێدانی چاڵ (Borehole)."
+            },
 
             // ٤. بیرکاری (Mathematics)
-            { en: "Calculus", ku: "هەژمارکردنی جیاکاری و تەواوکاری", cat: "math", sub: "Mathematic" },
-            { en: "Derivative", ku: "داتاشراو", cat: "math", sub: "Mathematic" },
-            { en: "Integration", ku: "تەواوکاری", cat: "math", sub: "Mathematic" },
-            { en: "Rate of Change", ku: "تێکڕای گۆڕان", cat: "math", sub: "Mathematic" },
-            { en: "Point of Inflection", ku: "خاڵی وەرگەڕان", cat: "math", sub: "Mathematic" },
+            {
+                en: "Derivative",
+                ku: "داتاشراو",
+                cat: "math",
+                sub: "Mathematic",
+                img: "https://images.unsplash.com/photo-1635070041409-e63e783ee3c1?auto=format&fit=crop&w=300&q=80",
+                desc: "پێوانەی ڕادەی گۆڕانی فانکشنێکە (Rate of change) بەپێی گۆڕانی گۆڕاوە سەربەخۆکەی.",
+                exam: "لە پرسیاری 'Find dy/dx' یان دۆزینەوەی لێژیی هێڵی لێکەوت (Slope of tangent) هەمیشە دێتەوە."
+            },
+            {
+                en: "Integration",
+                ku: "تەواوکاری",
+                cat: "math",
+                sub: "Mathematic",
+                img: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&w=300&q=80",
+                desc: "کرداری پێچەوانەی داتاشراوەیە و بۆ دۆزینەوەی ڕووبەری ژێر چەماوەکان بەکاردەهێنرێت.",
+                exam: "شیکارکردنی تەواوکاری بە ڕێگەکانی: Integration by parts یان Integration by substitution."
+            },
 
-            // ٥. وێنەکێشان و ئەندازەی وەسفی (Drawing & Descriptive Geometry)
-            { en: "Projection", ku: "دەرخستن و سێبەر (پرۆجێکشن)", cat: "drawing", sub: "Geometry" },
-            { en: "Elevation (Front View)", ku: "بینین لە بەشی پێشەوە", cat: "drawing", sub: "Drawing" },
-            { en: "Plan (Top View)", ku: "بینین لە بەشی سەرەوە", cat: "drawing", sub: "Drawing" },
-            { en: "Hidden Line", ku: "هێڵی نەبینراو (پچڕ پچڕ)", cat: "drawing", sub: "Drawing" },
-            { en: "True Length", ku: "درێژیی ڕاستەقینە", cat: "drawing", sub: "Geometry" },
+            // ٥. وێنەکێشان و ئەندازە (Drawing & Descriptive Geometry)
+            {
+                en: "Projection",
+                ku: "دەرخستن و سێبەر (پڕۆجێکشن)",
+                cat: "drawing",
+                sub: "Drawing",
+                img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=300&q=80",
+                desc: "پیشاندانی تەنێکی سێ دووری (3D)یە لەسەر ڕووتەختێکی دوو دووری (2D) لە ڕێگەی هێڵەکانەوە.",
+                exam: "کێشانی دیمەنە سەرەکییەکان: Front view, Top view (Plan), و Side view."
+            },
+            {
+                en: "Hidden Line",
+                ku: "هێڵی شاردراوە (پچڕ پچڕ)",
+                cat: "drawing",
+                sub: "Drawing",
+                img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=300&q=80",
+                desc: "ئەو هێڵە پچڕپچڕانەن لە نەخشەدا کە ئاماژە بە لێوار یان شوێنێک دەکەن کە بە چاو ڕاستەوخۆ نابینرێت.",
+                exam: "لە تاقیکردنەوەی ڕەسمدا نەکێشانی هێڵی شاردراوە خاڵی زۆری لەسەر دەڕوات."
+            },
 
             // ٦. ئامار (Statistics)
-            { en: "Standard Deviation", ku: "لادانی پێوەر (جیاوازی)", cat: "stats", sub: "Statistics" },
-            { en: "Mean", ku: "تێکڕا (مەعەدەل)", cat: "stats", sub: "Statistics" },
-            { en: "Median", ku: "ناوەند", cat: "stats", sub: "Statistics" },
-            { en: "Probability", ku: "ئەگەر", cat: "stats", sub: "Statistics" },
-
-            // ٧. کۆمپیوتەر (Computer)
-            { en: "Operating System", ku: "سیستەمی ئیشپێکردن", cat: "computer", sub: "Computer" },
-            { en: "User Friendly", ku: "ئاسانە بۆ بەکارهێنەر", cat: "computer", sub: "Computer" },
-            { en: "Database", ku: "کۆگای داتا و زانیاری", cat: "computer", sub: "Computer" }
+            {
+                en: "Standard Deviation",
+                ku: "لادانی پێوەر (جیاوازی)",
+                cat: "stats",
+                sub: "Statistics",
+                img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=300&q=80",
+                desc: "پێوەرێکە بۆ زانینی ئەوەی داتاکان تا چەند لە تێکڕای سەرەکی (Mean) دوورن یان لێی نزیکن.",
+                exam: "لە تاقیکردنەوەدا داوا دەکرێت بە خشتە (Table) هەژمار بکرێت بۆ داتای نموونەکان."
+            }
         ];
 
         const cardsContainer = document.getElementById('cardsContainer');
@@ -480,7 +633,7 @@
             });
 
             if (filtered.length === 0) {
-                cardsContainer.innerHTML = '<p style="text-align:center; color:#9ca3af; padding:30px;">هیچ وشەیەک نەدۆزرایەوە</p>';
+                cardsContainer.innerHTML = '<p style="text-align:center; color:#9ca3af; padding:40px;">هیچ وشەیەک نەدۆزرایەوە</p>';
                 return;
             }
 
@@ -490,18 +643,32 @@
                 cardEl.innerHTML = `
                     <div class="fc-inner">
                         <div class="fc-front">
-                            <div class="word-info">
+                            <div class="card-top">
                                 <span class="cat-tag">${item.sub}</span>
-                                <span class="en-word">${item.en}</span>
+                                <button class="sound-btn" onclick="speakWord(event, '${item.en}')" title="گوێگرتن">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </button>
                             </div>
-                            <button class="sound-btn" onclick="speakWord(event, '${item.en}')">
-                                <i class="fa-solid fa-volume-high"></i>
-                            </button>
+                            <div class="front-visual">
+                                <img src="${item.img}" alt="${item.en}" class="word-img" loading="lazy">
+                                <div class="en-title">${item.en}</div>
+                            </div>
+                            <div class="tap-hint">
+                                <i class="fa-solid fa-rotate"></i> پەنجە بنێ بۆ بینینی مانا و ڕوونکردنەوەی تاقیکردنەوە
+                            </div>
                         </div>
+
                         <div class="fc-back">
-                            <div class="meaning-info">
-                                <div class="ku-word">${item.ku}</div>
-                                <div class="hint">پەنجە بنێ بۆ بینینەوەی وشەکە</div>
+                            <div class="back-content">
+                                <div class="ku-title">${item.ku}</div>
+                                <div class="meaning-desc">${item.desc}</div>
+                                <div class="exam-box">
+                                    <b>لە تاقیکردنەوە چۆن دێتەوە؟</b><br>
+                                    ${item.exam}
+                                </div>
+                            </div>
+                            <div class="tap-hint">
+                                <i class="fa-solid fa-rotate"></i> گەڕانەوە بۆ ڕووی ئینگلیزی
                             </div>
                         </div>
                     </div>
