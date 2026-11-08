@@ -412,34 +412,6 @@
             document.getElementById('bernoulliResults').classList.add('show');
         }
     </script>
-    <script>
-    let voicePlayed = false;
-
-    function playLabVoice() {
-        if (voicePlayed) return;
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-            const text = "Welcome to Civil Engineering Hydraulics Lab";
-            const msg = new SpeechSynthesisUtterance(text);
-            msg.lang = 'en-US';
-            msg.rate = 0.9;
-            msg.volume = 1;
-            
-            window.speechSynthesis.speak(msg);
-            voicePlayed = true;
-        }
-    }
-
-    // پشتیوانیکردنی دەستلێدانی مۆبایل و سەفاری بە شێوازی مسۆگەر
-    ['touchstart', 'touchend', 'click'].forEach(evt => {
-        window.addEventListener(evt, playLabVoice, { once: true, passive: true });
-    });
-
-    window.addEventListener('load', () => {
-        playLabVoice();
-    });
-</script>
-
 
 </body>
 </html>
