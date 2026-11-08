@@ -1,1 +1,588 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فلاشکارتی ئەندازیاری - پلاتفۆرمی بونیاد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0719;
+            --card-front: #16102b;
+            --card-back: #1d1135;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --primary-gradient: linear-gradient(135deg, #e024c3, #7e22ce);
+            --accent-glow: rgba(224, 36, 195, 0.35);
+            --text-main: #ffffff;
+            --text-sub: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 24px 16px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .stage-box {
+            background: linear-gradient(135deg, rgba(224, 36, 195, 0.15), rgba(126, 34, 206, 0.15));
+            border: 1px solid rgba(224, 36, 195, 0.35);
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stage-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .stage-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .stage-text h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .stage-text span {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 13px 44px 13px 16px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            backdrop-filter: blur(8px);
+            direction: ltr;
+            text-align: right;
+        }
+
+        .search-box input:focus {
+            border-color: #e024c3;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 4px 0 6px;
+            scrollbar-width: none;
+        }
+
+        .filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-sub);
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .fc-item {
+            perspective: 1000px;
+            width: 100%;
+            min-height: 180px;
+            cursor: pointer;
+        }
+
+        .fc-inner {
+            position: relative;
+            width: 100%;
+            min-height: 180px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 20px;
+        }
+
+        .fc-item.flipped .fc-inner {
+            transform: rotateY(180deg);
+        }
+
+        .fc-front, .fc-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 18px 20px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fc-front {
+            background: var(--card-front);
+        }
+
+        .fc-back {
+            background: var(--card-back);
+            transform: rotateY(180deg);
+            border-color: rgba(224, 36, 195, 0.45);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            direction: ltr;
+        }
+
+        .cat-tag {
+            font-size: 0.72rem;
+            color: #f472b6;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: rgba(224, 36, 195, 0.15);
+            padding: 4px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(224, 36, 195, 0.3);
+        }
+
+        .sound-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f472b6;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .sound-btn:active {
+            transform: scale(0.9);
+            background: rgba(224, 36, 195, 0.3);
+        }
+
+        .en-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            direction: ltr;
+            text-align: left;
+            margin: 14px 0;
+        }
+
+        .tap-hint {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .back-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .ku-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #38bdf8;
+        }
+
+        .meaning-desc {
+            font-size: 0.86rem;
+            color: #e5e7eb;
+            line-height: 1.5;
+        }
+
+        .exam-box {
+            background: rgba(0, 0, 0, 0.35);
+            border-right: 3px solid #e024c3;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.45;
+        }
+
+        .exam-box b {
+            color: #f472b6;
+        }
+
+        .back-nav {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .back-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 13px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            color: #ffffff;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="stage-box">
+            <div class="stage-title">
+                <div class="stage-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="stage-text">
+                    <h2>ئەندازیاری شارستانی - قۆناغی ١</h2>
+                    <span>فەرهەنگ، مانا و شێوازی تاقیکردنەوە</span>
+                </div>
+            </div>
+            <span style="font-size: 0.8rem; color: #f472b6; font-weight: 700;">فەرهەنگ</span>
+        </div>
+
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="گەڕان بەدوای وشەدا (ئینگلیزی یان کوردی)...">
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-cat="all">هەموو وانەکان</button>
+            <button class="filter-btn" data-cat="materials">کەرەستەکان (Materials)</button>
+            <button class="filter-btn" data-cat="mechanics">میکانیک (Mechanics)</button>
+            <button class="filter-btn" data-cat="geology">جیۆلۆجی (Geology)</button>
+            <button class="filter-btn" data-cat="math">بیرکاری (Math)</button>
+            <button class="filter-btn" data-cat="drawing">ڕەسم و ئەندازە (Drawing)</button>
+            <button class="filter-btn" data-cat="stats">ئامار (Statistics)</button>
+            <button class="filter-btn" data-cat="computer">کۆمپیوتەر (Computer)</button>
+        </div>
+
+        <div class="cards-list" id="cardsContainer"></div>
+
+        <div class="back-nav">
+            <a href="resources.html">
+                <i class="fa-solid fa-arrow-right"></i>
+                گەڕانەوە بۆ سەرچاوەکان
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const flashcardsData = [
+            {
+                en: "Compressive Strength",
+                ku: "هێزی بەرگری بۆ چوونەوەیەک (پەستان)",
+                cat: "materials",
+                sub: "Building Material",
+                desc: "توانای بەرگەگرتنی کۆنکرێت یان کەرەستە لە دژی هێزێک کە دەیکۆشێت و پەستانی دەخاتە سەر.",
+                exam: "لە تاقیکردنەوەدا بە زۆری داوای پێوانەکردنی دەکرێت دوای ٢٨ ڕۆژ لە تاقیگە (Crushing test) یان بەراوردکردنی لەگەڵ Tensile."
+            },
+            {
+                en: "Tensile Strength",
+                ku: "هێزی ڕاکێشان و کشان",
+                cat: "materials",
+                sub: "Building Material",
+                desc: "توانای بەرگەگرتنی ماددەکە لە دژی هێزی ڕاکێشان بەرەو دەرەوە پێش ئەوەی درز بەرێت یان بپچڕێت.",
+                exam: "زۆرجار دەپرسرێت: بۆچی شیش (Steel Reinforcement) لە کۆنکرێت دادەنرێت؟ وەڵامەکەی پەیوەستە بە لاوازی کۆنکرێت لە Tensile strength دا."
+            },
+            {
+                en: "Curing",
+                ku: "ئاوڕشێنکردنی کۆنکرێت",
+                cat: "materials",
+                sub: "Building Material",
+                desc: "پاراستنی شێداری و پلەی گەرمیی کۆنکرێتە لە ماوەی سەرەتای ڕەقبوونیدا تا بەهێزیی تەواو بەدەستبهێنێت.",
+                exam: "لە پرسیارە کورتەکاندا دێت وەک: 'What is the purpose of curing?' بۆ پاراستنی شێ و گەیشتن بە ئەوپەڕی بەرگری."
+            },
+            {
+                en: "Mortar",
+                ku: "مۆنە (تێکەڵەی چیمەنتۆ، لم و ئاو)",
+                cat: "materials",
+                sub: "Building Material",
+                desc: "ئەو هەویرە لکێنەرەیە کە لە چیمەنتۆ و لم و ئاو دروست دەکرێت بۆ پێکەوەبەستنی خشت یان بلۆک.",
+                exam: "لە تاقیکردنەوەدا دەپرسرێت: 'Differentiate between concrete and mortar' جیاوازییەکەی نەبوونی Gravel (چەو)ـە لە مۆنەدا."
+            },
+            {
+                en: "Elastic Deformation",
+                ku: "شێواندنی کاتی (جیڕی)",
+                cat: "materials",
+                sub: "Building Material",
+                desc: "گۆڕانی شێوەی ماددە کاتێک هێزی دەخرێتە سەر، و دەگەڕێتەوە باری سەرەتایی خۆی بە لابردنی هێزەکە.",
+                exam: "پەیوەستە بە یاسای هۆک (Hooke's Law)، و لە وێنەی هێڵکاریی Stress-Strain دا داوا دەکرێت دیاری بکرێت."
+            },
+            {
+                en: "Plastic Deformation",
+                ku: "شێواندنی هەمیشەیی",
+                cat: "materials",
+                sub: "Building Material",
+                desc: "شێواندن و درێژبوونێک کە دوای لابردنی هێزەکە ماددەکە ناگەڕێتەوە شێوەی بنەڕەتی خۆی.",
+                exam: "لە پرسیاری تاقیکردنەوەدا دوای خاڵی Yield Point دەست پێدەکات و هۆکاری سەرەکیی شکان یان لەکارکەوتنە."
+            },
+            {
+                en: "Equilibrium",
+                ku: "هاوسەنگیی هێزەکان",
+                cat: "mechanics",
+                sub: "Mechanics",
+                desc: "دۆخێکە کە سەرجەمی هەموو هێزەکان و زەبرەکان (Moments) یەکسانن بە سفر (ΣFx=0, ΣFy=0, ΣM=0).",
+                exam: "بنچینەی سەرجەم پرسیارەکانی شیکارکردنی میکانیک و دۆزینەوەی کاردانەوەکانە (Reactions at supports)."
+            },
+            {
+                en: "Resultant Force",
+                ku: "هێزی دەرئەنجام (سەرجەم)",
+                cat: "mechanics",
+                sub: "Mechanics",
+                desc: "تەنها یەک هێزە کە هەمان کاریگەریی کۆمەڵە هێزێکی جیاواز لەسەر تەنەکە دروست دەکات.",
+                exam: "بە شێوازی 'Determine the magnitude and direction of the resultant' لە تاقیکردنەوەکاندا دێتەوە."
+            },
+            {
+                en: "Moment of Inertia",
+                ku: "زەبری بارنەگۆڕی",
+                cat: "mechanics",
+                sub: "Mechanics",
+                desc: "بەرگریی تەن یان پەڕەی ئەندازیارییە لە دژی چەمانەوە و سووڕانەوە لە دەوری تەوەرێکدا (I = ∫y² dA).",
+                exam: "پێویستە هاوکێشەی لاکێشە لەبەر بێت: (I = bh³/12) چونکە لە زۆربەی مەسەلەکانی مەرحەلە یەک بەکاردێت."
+            },
+            {
+                en: "Center of Gravity",
+                ku: "ناوەندی کێشکردن (چەقی قورسایی)",
+                cat: "mechanics",
+                sub: "Mechanics",
+                desc: "ئەو خاڵەیە کە وا دادەنرێت سەرجەمی کێشی تەنەکە لەوێدا کۆبووەتەوە و کێشی دەکەوێتە سەر.",
+                exam: "لە پرسیارەکان بە شێوازی دۆزینەوەی پۆتانی (X̄, Ȳ) بۆ شێوە ئاوێتەکان (Composite bodies) دێت."
+            },
+            {
+                en: "Weathering",
+                ku: "گۆڕان و داخورانی بەرد بە کەشوهەوا",
+                cat: "geology",
+                sub: "Geology",
+                desc: "تێکشکاندن و گۆڕانی بەردەکانە لەسەر ڕووی زەوی بەهۆی ئاو، با، پلەی گەرمی یان کرداری کیمیایی.",
+                exam: "پرسیار دەکرێت لەسەر دوو جۆرەکەی: جیاوازی نێوان Mechanical weathering و Chemical weathering."
+            },
+            {
+                en: "Aquifer",
+                ku: "چینی ئاوی ژێرزەوی",
+                cat: "geology",
+                sub: "Geology",
+                desc: "چینێکی بەردین یان لمییە کە دەتوانێت بڕێکی باشی ئاو لە خۆیدا کۆبکاتەوە و ئاو پێیدا تێپەڕێت.",
+                exam: "لە تاقیکردنەوەدا پەیوەستە بە شیکاری دروستکردنی بناغە و پێویستیی لێدانی چاڵ (Borehole)."
+            },
+            {
+                en: "Derivative",
+                ku: "داتاشراو",
+                cat: "math",
+                sub: "Mathematic",
+                desc: "پێوانەی ڕادەی گۆڕانی فانکشنێکە (Rate of change) بەپێی گۆڕانی گۆڕاوە سەربەخۆکەی.",
+                exam: "لە پرسیاری 'Find dy/dx' یان دۆزینەوەی لێژیی هێڵی لێکەوت (Slope of tangent) هەمیشە دێتەوە."
+            },
+            {
+                en: "Integration",
+                ku: "تەواوکاری",
+                cat: "math",
+                sub: "Mathematic",
+                desc: "کرداری پێچەوانەی داتاشراوەیە و بۆ دۆزینەوەی ڕووبەری ژێر چەماوەکان بەکاردەهێنرێت.",
+                exam: "شیکارکردنی تەواوکاری بە ڕێگەکانی: Integration by parts یان Integration by substitution."
+            },
+            {
+                en: "Projection",
+                ku: "دەرخستن و سێبەر (پڕۆجێکشن)",
+                cat: "drawing",
+                sub: "Drawing",
+                desc: "پیشاندانی تەنێکی سێ دووری (3D)یە لەسەر ڕووتەختێکی دوو دووری (2D) لە ڕێگەی هێڵەکانەوە.",
+                exam: "کێشانی دیمەنە سەرەکییەکان: Front view, Top view (Plan), و Side view."
+            },
+            {
+                en: "Hidden Line",
+                ku: "هێڵی شاردراوە (پچڕ پچڕ)",
+                cat: "drawing",
+                sub: "Drawing",
+                desc: "ئەو هێڵە پچڕپچڕانەن لە نەخشەدا کە ئاماژە بە لێوار یان شوێنێک دەکەن کە بە چاو ڕاستەوخۆ نابینرێت.",
+                exam: "لە تاقیکردنەوەی ڕەسمدا نەکێشانی هێڵی شاردراوە خاڵی زۆری لەسەر دەڕوات."
+            },
+            {
+                en: "Standard Deviation",
+                ku: "لادانی پێوەر (جیاوازی)",
+                cat: "stats",
+                sub: "Statistics",
+                desc: "پێوەرێکە بۆ زانینی ئەوەی داتاکان تا چەند لە تێکڕای سەرەکی (Mean) دوورن یان لێی نزیکن.",
+                exam: "لە تاقیکردنەوەدا داوا دەکرێت بە خشتە (Table) هەژمار بکرێت بۆ داتای نموونەکان."
+            }
+        ];
+
+        const cardsContainer = document.getElementById('cardsContainer');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        let activeCategory = 'all';
+
+        function renderCards() {
+            const query = searchInput.value.toLowerCase().trim();
+            cardsContainer.innerHTML = '';
+
+            const filtered = flashcardsData.filter(item => {
+                const matchesCat = (activeCategory === 'all' || item.cat === activeCategory);
+                const matchesQuery = item.en.toLowerCase().includes(query) || item.ku.includes(query);
+                return matchesCat && matchesQuery;
+            });
+
+            if (filtered.length === 0) {
+                cardsContainer.innerHTML = '<p style="text-align:center; color:#9ca3af; padding:40px;">هیچ وشەیەک نەدۆزرایەوە</p>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'fc-item';
+                cardEl.innerHTML = `
+                    <div class="fc-inner">
+                        <div class="fc-front">
+                            <div class="card-top">
+                                <span class="cat-tag">${item.sub}</span>
+                                <button class="sound-btn" onclick="speakWord(event, '${item.en}')" title="گوێگرتن">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </button>
+                            </div>
+                            <div class="en-title">${item.en}</div>
+                            <div class="tap-hint">
+                                <i class="fa-solid fa-rotate"></i> پەنجە بنێ بۆ بینینی مانا و ڕوونکردنەوەی تاقیکردنەوە
+                            </div>
+                        </div>
+
+                        <div class="fc-back">
+                            <div class="back-content">
+                                <div class="ku-title">${item.ku}</div>
+                                <div class="meaning-desc">${item.desc}</div>
+                                <div class="exam-box">
+                                    <b>لە تاقیکردنەوە چۆن دێتەوە؟</b><br>
+                                    ${item.exam}
+                                </div>
+                            </div>
+                            <div class="tap-hint">
+                                <i class="fa-solid fa-rotate"></i> گەڕانەوە بۆ ڕووی ئینگلیزی
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                cardEl.addEventListener('click', (e) => {
+                    if (!e.target.closest('.sound-btn')) {
+                        cardEl.classList.toggle('flipped');
+                    }
+                });
+
+                cardsContainer.appendChild(cardEl);
+            });
+        }
+
+        function speakWord(event, text) {
+            event.stopPropagation();
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        searchInput.addEventListener('input', renderCards);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCategory = btn.getAttribute('data-cat');
+                renderCards();
+            });
+        });
+
+        renderCards();
+    </script>
+</body>
+</html>
 
