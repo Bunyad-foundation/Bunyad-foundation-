@@ -1,1 +1,350 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ژووری تاقیگەکان - پلاتفۆرمی بونیاد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0719;
+            --card-bg: #16102b;
+            --card-border: rgba(224, 36, 195, 0.35);
+            --primary-grad: linear-gradient(135deg, #e024c3, #7e22ce);
+            --pink-accent: #f472b6;
+            --blue-accent: #38bdf8;
+            --text-main: #ffffff;
+            --text-sub: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(224, 36, 195, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(126, 34, 206, 0.18) 0%, transparent 40%);
+            color: var(--text-main);
+            min-height: 100vh;
+            position: relative;
+            padding: 24px;
+        }
+
+        /* کارتی سووچی دەستە چەپ */
+        .lab-corner-card {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 175px;
+            background: rgba(22, 16, 43, 0.95);
+            border: 2px solid var(--pink-accent);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(224, 36, 195, 0.35);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 999;
+            backdrop-filter: blur(8px);
+        }
+
+        .lab-corner-card:hover {
+            transform: translateY(-8px) scale(1.04);
+            border-color: #ffffff;
+            box-shadow: 0 16px 36px rgba(224, 36, 195, 0.55);
+        }
+
+        .lab-corner-card:active {
+            transform: scale(0.96);
+        }
+
+        .lab-image-container {
+            width: 100%;
+            height: 110px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e113a, #0b0719);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lab-image-container svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .lab-badge-icon {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(11, 7, 25, 0.85);
+            border: 1px solid var(--pink-accent);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pink-accent);
+            font-size: 0.8rem;
+        }
+
+        .lab-card-footer {
+            padding: 10px 8px;
+            background: linear-gradient(180deg, rgba(22, 16, 43, 0.9) 0%, rgba(11, 7, 25, 0.98) 100%);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .lab-card-footer span {
+            display: block;
+            font-size: 0.84rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.35;
+        }
+
+        .lab-card-footer small {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--pink-accent);
+            margin-top: 2px;
+            font-weight: 600;
+        }
+
+        /* مۆداڵ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 16px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 22px;
+            width: 100%;
+            max-width: 380px;
+            padding: 26px 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            position: relative;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 14px;
+            left: 18px;
+            font-size: 1.4rem;
+            color: var(--text-sub);
+            cursor: pointer;
+        }
+
+        .modal-box h3 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--pink-accent);
+            margin-bottom: 6px;
+        }
+
+        .modal-box p {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 18px;
+        }
+
+        .code-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #fff;
+            font-size: 1.15rem;
+            text-align: center;
+            font-weight: 800;
+            direction: ltr;
+            letter-spacing: 2px;
+            outline: none;
+            margin-bottom: 14px;
+        }
+
+        .code-input::placeholder {
+            font-size: 0.85rem;
+            letter-spacing: 0;
+            color: #64748b;
+        }
+
+        .code-input:focus {
+            border-color: var(--pink-accent);
+        }
+
+        .verify-btn {
+            width: 100%;
+            background: var(--primary-grad);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            padding: 12px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(224, 36, 195, 0.35);
+        }
+
+        .verify-btn:active {
+            transform: scale(0.98);
+        }
+
+        .error-msg {
+            color: #f87171;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- کارتی سووچی دەستە چەپ بە وێنەی گەرەنتیکراوی تاقیگە -->
+    <div class="lab-corner-card" onclick="openLabModal()">
+        <div class="lab-image-container">
+            <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#241442"/>
+                        <stop offset="100%" stop-color="#0e0720"/>
+                    </linearGradient>
+                    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#f472b6"/>
+                        <stop offset="100%" stop-color="#a855f7"/>
+                    </linearGradient>
+                    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#38bdf8"/>
+                        <stop offset="100%" stop-color="#0284c7"/>
+                    </linearGradient>
+                </defs>
+                <rect width="300" height="180" fill="url(#bgGrad)"/>
+                
+                <!-- مێزی تاقیگە -->
+                <line x1="20" y1="150" x2="280" y2="150" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+                
+                <!-- شوشەی فلۆو و تاقیگە (Flask) -->
+                <path d="M 85 70 L 105 70 L 105 95 L 125 135 C 127 140, 122 145, 115 145 L 75 145 C 68 145, 63 140, 65 135 L 85 95 Z" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+                <path d="M 75 125 L 115 125 L 118 140 C 119 143, 116 144, 113 144 L 77 144 C 74 144, 71 143, 72 140 Z" fill="url(#liquidGrad)" opacity="0.85"/>
+                
+                <!-- بۆری و کۆنتێنەری تاقیگە (Beaker) -->
+                <rect x="150" y="80" width="45" height="65" rx="3" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+                <rect x="153" y="105" width="39" height="37" rx="2" fill="url(#blueGrad)" opacity="0.8"/>
+                <line x1="147" y1="80" x2="198" y2="80" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round"/>
+                
+                <!-- بۆری تاقیگەی بێرنۆلی و لەرینەوەی شلە -->
+                <path d="M 95 65 Q 140 20 200 65" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4,4"/>
+                <circle cx="215" cy="115" r="16" fill="rgba(224, 36, 195, 0.2)" stroke="#f472b6" stroke-width="2"/>
+                <circle cx="215" cy="115" r="6" fill="#f472b6"/>
+                <circle cx="100" cy="110" r="3" fill="#ffffff" opacity="0.6"/>
+                <circle cx="170" cy="120" r="3" fill="#ffffff" opacity="0.6"/>
+            </svg>
+            <div class="lab-badge-icon">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+        </div>
+        <div class="lab-card-footer">
+            <span>چوونە ژوورەوە بۆ ناو تاقیگەکان</span>
+            <small>پێویستی بە کۆدی تایبەتە <i class="fa-solid fa-key"></i></small>
+        </div>
+    </div>
+
+    <!-- مۆداڵی داواکردنی کۆد (بێ ئەوەی هیچ کۆدێکی تێدا دەربکەوێت) -->
+    <div class="modal-overlay" id="labCodeModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeLabModal()">&times;</span>
+            <i class="fa-solid fa-shield-halved" style="font-size: 2.2rem; color: var(--pink-accent); margin-bottom: 10px;"></i>
+            <h3>کۆدی چوونەژوورەوە</h3>
+            <p>تکایە ئەو کۆدە بنووسە کە لەلایەن بەڕێوەبەرەوە پێت دراوە</p>
+
+            <input type="text" id="accessCodeInput" class="code-input" placeholder="کۆدەکەت لێرە بنووسە...">
+            <button class="verify-btn" onclick="checkAccessCode()">تەئکیدکردن و چوونەژوورەوە</button>
+
+            <div class="error-msg" id="codeError">
+                <i class="fa-solid fa-triangle-exclamation"></i> ئەم کۆدە نادروستە، تکایە پەیوەندی بە بەڕێوەبەرەوە بکە!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // لیستی کۆدە پارێزراوەکان
+        const accessCodes = [
+            "BUNYAD-101",
+            "BUNYAD-102",
+            "BUNYAD-103",
+            "BUNYAD-104",
+            "BUNYAD-105",
+            "BUNYAD-106",
+            "BUNYAD-107",
+            "BUNYAD-108",
+            "BUNYAD-109",
+            "BUNYAD-110"
+        ];
+
+        function openLabModal() {
+            document.getElementById('labCodeModal').classList.add('active');
+            document.getElementById('accessCodeInput').value = '';
+            document.getElementById('codeError').style.display = 'none';
+            document.getElementById('accessCodeInput').focus();
+        }
+
+        function closeLabModal() {
+            document.getElementById('labCodeModal').classList.remove('active');
+        }
+
+        function checkAccessCode() {
+            const entered = document.getElementById('accessCodeInput').value.trim().toUpperCase();
+            const err = document.getElementById('codeError');
+
+            if (accessCodes.includes(entered)) {
+                window.location.href = 'lab-engine.html';
+            } else {
+                err.style.display = 'block';
+            }
+        }
+
+        window.onclick = function(e) {
+            const m = document.getElementById('labCodeModal');
+            if (e.target === m) {
+                closeLabModal();
+            }
+        }
+    </script>
+</body>
+</html>
 
