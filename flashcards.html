@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فلاشکارتی ئەندازیاری - پلاتفۆرمی بونیاد</title>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>ئینگلیزی بۆ ئەندازیاری - پلاتفۆرمی بونیاد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #0b0f19;
-            --card-front: #161f30;
-            --card-back: #1e293b;
-            --accent-cyan: #00f2fe;
-            --accent-blue: #4facfe;
-            --text-main: #f1f5f9;
-            --text-sub: #94a3b8;
+            --bg-color: #0b0719;
+            --card-front: #16102b;
+            --card-back: #21133e;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --primary-gradient: linear-gradient(135deg, #e024c3, #7e22ce);
+            --accent-glow: rgba(224, 36, 195, 0.35);
+            --text-main: #ffffff;
+            --text-sub: #9ca3af;
         }
 
         * {
@@ -25,321 +27,518 @@
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
             color: var(--text-main);
             min-height: 100vh;
+            padding: 16px 16px 50px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 24px 16px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .header h1 {
-            font-size: 1.6rem;
-            color: var(--accent-cyan);
-            margin-bottom: 6px;
-        }
-
-        .header p {
-            color: var(--text-sub);
-            font-size: 0.9rem;
         }
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
 
-        /* ستایلی فلاشکارت لە کاتی گەڕانەوە (3D Flip) */
-        .card-container {
+        .engineering-banner {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: flex-end;
+            padding: 18px;
+        }
+
+        .engineering-banner img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.75);
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(11, 7, 25, 0.95) 20%, rgba(11, 7, 25, 0.3) 70%, transparent);
+            z-index: 2;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 3;
+            text-align: right;
+            width: 100%;
+        }
+
+        .banner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            background: rgba(224, 36, 195, 0.25);
+            border: 1px solid rgba(224, 36, 195, 0.5);
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #f472b6;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .banner-content h1 {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .banner-content p {
+            font-size: 0.8rem;
+            color: #d1d5db;
+        }
+
+        .stage-box {
+            background: linear-gradient(135deg, rgba(224, 36, 195, 0.12), rgba(126, 34, 206, 0.12));
+            border: 1px solid rgba(224, 36, 195, 0.35);
+            border-radius: 18px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stage-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stage-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .stage-text h2 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .stage-text span {
+            font-size: 0.78rem;
+            color: var(--text-sub);
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 13px 44px 13px 16px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            backdrop-filter: blur(8px);
+            direction: ltr;
+            text-align: right;
+        }
+
+        .search-box input:focus {
+            border-color: #e024c3;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 4px 0 6px;
+            scrollbar-width: none;
+        }
+
+        .filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-sub);
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .fc-item {
             perspective: 1000px;
-            height: 220px;
+            width: 100%;
+            height: 120px;
             cursor: pointer;
         }
 
-        .card-inner {
+        .fc-inner {
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
-            border-radius: 16px;
+            border-radius: 18px;
         }
 
-        .card-container.flipped .card-inner {
+        .fc-item.flipped .fc-inner {
             transform: rotateY(180deg);
         }
 
-        .card-face {
+        .fc-front, .fc-back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 18px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .fc-front {
+            background: var(--card-front);
+        }
+
+        .fc-back {
+            background: var(--card-back);
+            transform: rotateY(180deg);
+            border-color: rgba(224, 36, 195, 0.4);
+        }
+
+        .word-info {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        /* دیوی پێشەوە */
-        .card-front {
-            background: linear-gradient(145deg, var(--card-front), #101623);
-        }
-
-        .top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 3px;
+            text-align: left;
             direction: ltr;
         }
 
-        .term-badge {
-            background: rgba(0, 242, 254, 0.15);
-            color: var(--accent-cyan);
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 600;
+        .word-info .en-word {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
         }
 
-        .audio-btn {
-            background: rgba(255, 255, 255, 0.1);
+        .word-info .cat-tag {
+            font-size: 0.72rem;
+            color: #f472b6;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .meaning-info {
+            text-align: right;
+            direction: rtl;
+            width: 100%;
+        }
+
+        .meaning-info .ku-word {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 2px;
+        }
+
+        .meaning-info .hint {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+        }
+
+        .sound-btn {
+            background: rgba(255, 255, 255, 0.08);
             border: none;
-            color: var(--text-main);
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #f472b6;
+            font-size: 1.05rem;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: 0.2s;
         }
 
-        .audio-btn:hover {
-            background: var(--accent-blue);
-        }
-
-        .english-term {
-            text-align: center;
-            direction: ltr;
-        }
-
-        .english-term h2 {
-            font-size: 1.8rem;
-            color: #fff;
-            letter-spacing: 0.5px;
-        }
-
-        .flip-hint {
-            text-align: center;
-            color: var(--text-sub);
-            font-size: 0.75rem;
-        }
-
-        /* دیوی پشتەوە */
-        .card-back {
-            background: linear-gradient(145deg, var(--card-back), #131a26);
-            transform: rotateY(180deg);
-            border-color: rgba(79, 172, 254, 0.3);
-        }
-
-        .kurdish-meaning {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--accent-cyan);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 8px;
-        }
-
-        .scientific-concept {
-            font-size: 0.88rem;
-            color: #cbd5e1;
-            line-height: 1.5;
-        }
-
-        .exam-context {
-            background: rgba(0, 0, 0, 0.25);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            color: #94a3b8;
-            direction: ltr;
-            text-align: left;
-            border-left: 3px solid var(--accent-blue);
+        .sound-btn:active {
+            transform: scale(0.9);
+            background: rgba(224, 36, 195, 0.3);
         }
 
         .back-nav {
-            margin-top: 24px;
-            text-decoration: none;
-            color: var(--text-sub);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-top: 10px;
+            width: 100%;
         }
 
-        .back-nav:hover {
-            color: var(--accent-cyan);
+        .back-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 13px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            color: #ffffff;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>فلاشکارتی ئەندازیاری بونیاد</h1>
-        <p>پەنجە لە کارتەکە بدە بۆ بینینی مانا و بەکارهێنانی لە تاقیکردنەوەدا</p>
-    </div>
-
     <div class="container">
-
-        <!-- کارتی ١: Tension -->
-        <div class="card-container" onclick="toggleCard(this)">
-            <div class="card-inner">
-                <div class="card-face card-front">
-                    <div class="top-row">
-                        <span class="term-badge">Mechanics / Materials</span>
-                        <button class="audio-btn" onclick="speakTerm(event, 'Tension')">🔊</button>
-                    </div>
-                    <div class="english-term">
-                        <h2>Tension</h2>
-                    </div>
-                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
-                </div>
-                <div class="card-face card-back">
-                    <div class="kurdish-meaning">فشاری کێشکردن (ڕاکێشان)</div>
-                    <div class="scientific-concept">هێزێکە کە کار لەسەر ماددەکە دەکات بە ئاراستەی دەرەوە و هەوڵی درێژکردنەوە و ڕاکێشانی دەدات (وەک شیشی ئاسن لە کاتی چەمانەوەدا).</div>
-                    <div class="exam-context">
-                        <strong>Exam prompt:</strong> "Determine the tension force in cable AB..."
-                    </div>
-                </div>
+        
+        <div class="engineering-banner">
+            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="Civil Engineering Construction">
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+                <span class="banner-badge"><i class="fa-solid fa-compass-drafting"></i> پلاتفۆرمی بونیاد</span>
+                <h1>ئینگلیزی بۆ ئەندازیاری</h1>
+                <p>فێربوونی زمانەوانی و زاراوەکانی بیناسازی</p>
             </div>
         </div>
 
-        <!-- کارتی ٢: Compression -->
-        <div class="card-container" onclick="toggleCard(this)">
-            <div class="card-inner">
-                <div class="card-face card-front">
-                    <div class="top-row">
-                        <span class="term-badge">Mechanics / Materials</span>
-                        <button class="audio-btn" onclick="speakTerm(event, 'Compression')">🔊</button>
-                    </div>
-                    <div class="english-term">
-                        <h2>Compression</h2>
-                    </div>
-                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
+        <div class="stage-box">
+            <div class="stage-title">
+                <div class="stage-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
                 </div>
-                <div class="card-face card-back">
-                    <div class="kurdish-meaning">فشاری پەستاندن (گوشین)</div>
-                    <div class="scientific-concept">هێزێکە بەرەو ناوەوەی ماددەکە کار دەکات و هەوڵی بچووککردنەوە یان پانکردنەوەی قەبارەکەی دەدات (وەک کۆڵەکەی کۆنکرێتی).</div>
-                    <div class="exam-context">
-                        <strong>Exam prompt:</strong> "Calculate the maximum compressive stress in the column..."
-                    </div>
+                <div class="stage-text">
+                    <h2>ئەندازیاری شارستانی - قۆناغی ١</h2>
+                    <span>سەرجەم وانە و زاراوە سەرەکییەکان</span>
                 </div>
             </div>
+            <span style="font-size: 0.8rem; color: #f472b6; font-weight: 700;">فەرهەنگ</span>
         </div>
 
-        <!-- کارتی ٣: Shear Stress -->
-        <div class="card-container" onclick="toggleCard(this)">
-            <div class="card-inner">
-                <div class="card-face card-front">
-                    <div class="top-row">
-                        <span class="term-badge">Strength of Materials</span>
-                        <button class="audio-btn" onclick="speakTerm(event, 'Shear Stress')">🔊</button>
-                    </div>
-                    <div class="english-term">
-                        <h2>Shear Stress</h2>
-                    </div>
-                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
-                </div>
-                <div class="card-face card-back">
-                    <div class="kurdish-meaning">فشاری بڕین (لەتکردن)</div>
-                    <div class="scientific-concept">فشارێکە کاتێک دروست دەبێت کە دوو هێزی هاوتەریب و پێچەوانە هەوڵ بدەن چینەکانی ماددەکە بەسەر یەکتردا بخشێنن و بیبڕن.</div>
-                    <div class="exam-context">
-                        <strong>Exam prompt:</strong> "Find the average shear stress acting on the bolt..."
-                    </div>
-                </div>
-            </div>
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="گەڕان بەدوای وشەدا (ئینگلیزی یان کوردی)...">
         </div>
 
-        <!-- کارتی ٤: Bending Moment -->
-        <div class="card-container" onclick="toggleCard(this)">
-            <div class="card-inner">
-                <div class="card-face card-front">
-                    <div class="top-row">
-                        <span class="term-badge">Structural Analysis</span>
-                        <button class="audio-btn" onclick="speakTerm(event, 'Bending Moment')">🔊</button>
-                    </div>
-                    <div class="english-term">
-                        <h2>Bending Moment</h2>
-                    </div>
-                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
-                </div>
-                <div class="card-face card-back">
-                    <div class="kurdish-meaning">مۆمێنتی چەمانەوە</div>
-                    <div class="scientific-concept">کاریگەریی ئەو هێز و مۆمێنتانەیە کە دەبنە هۆی چەمانەوەی تیر یان پێکهاتە ئەندازیارییەکە (Beam) لە ژێر باردا.</div>
-                    <div class="exam-context">
-                        <strong>Exam prompt:</strong> "Draw the shear force and bending moment diagrams for the beam..."
-                    </div>
-                </div>
-            </div>
+        <div class="filters">
+            <button class="filter-btn active" data-cat="all">هەموو وانەکان</button>
+            <button class="filter-btn" data-cat="materials">کەرەستەکان (Materials)</button>
+            <button class="filter-btn" data-cat="mechanics">میکانیک (Mechanics)</button>
+            <button class="filter-btn" data-cat="geology">جیۆلۆجی (Geology)</button>
+            <button class="filter-btn" data-cat="math">بیرکاری (Math)</button>
+            <button class="filter-btn" data-cat="drawing">ڕەسم و ئەندازە (Drawing)</button>
+            <button class="filter-btn" data-cat="stats">ئامار (Statistics)</button>
+            <button class="filter-btn" data-cat="computer">کۆمپیوتەر (Computer)</button>
         </div>
 
-        <!-- کارتی ٥: Deflection -->
-        <div class="card-container" onclick="toggleCard(this)">
-            <div class="card-inner">
-                <div class="card-face card-front">
-                    <div class="top-row">
-                        <span class="term-badge">Structural Mechanics</span>
-                        <button class="audio-btn" onclick="speakTerm(event, 'Deflection')">🔊</button>
-                    </div>
-                    <div class="english-term">
-                        <h2>Deflection</h2>
-                    </div>
-                    <div class="flip-hint">پەنجە بنێ بۆ بینینی شیکاری ↺</div>
-                </div>
-                <div class="card-face card-back">
-                    <div class="kurdish-meaning">داکەوتن / لادانی ستوونی</div>
-                    <div class="scientific-concept">ئەو دوورییە ستوونییەیە کە تەنێک یان سەقفێک بەهۆی کێش یان بارەوە لە شوێنی بنەڕەتیی خۆی بەرەو خوارەوە دادەبەزێت.</div>
-                    <div class="exam-context">
-                        <strong>Exam prompt:</strong> "Compute the maximum deflection at the midpoint..."
-                    </div>
-                </div>
-            </div>
+        <div class="cards-list" id="cardsContainer"></div>
+
+        <div class="back-nav">
+            <a href="resources.html">
+                <i class="fa-solid fa-arrow-right"></i>
+                گەڕانەوە بۆ سەرچاوەکان
+            </a>
         </div>
 
     </div>
-
-    <a href="index.html" class="back-nav">← گەڕانەوە بۆ لاپەڕەی سەرەکی</a>
 
     <script>
-        function toggleCard(container) {
-            container.classList.toggle('flipped');
+        const flashcardsData = [
+            // ١. کەرەستەکانی بیناسازی (Building Material)
+            { en: "Compressive Strength", ku: "هێزی بەرگری بۆ چوونەوەیەک (پەستان)", cat: "materials", sub: "Building Material" },
+            { en: "Tensile Strength", ku: "هێزی ڕاکێشان و کشان", cat: "materials", sub: "Building Material" },
+            { en: "Curing", ku: "ئاوڕشێنکردنی کۆنکرێت", cat: "materials", sub: "Building Material" },
+            { en: "Bulk Density", ku: "چڕیی ماددە بە بۆشایی و کونەکانیەوە", cat: "materials", sub: "Building Material" },
+            { en: "Admixture", ku: "ئاوێتە (ماددەی کیمیایی زیادکراو)", cat: "materials", sub: "Building Material" },
+            { en: "Mortar", ku: "مۆنە (پێکهاتوو لە لم، ئاو و چیمەنتۆ)", cat: "materials", sub: "Building Material" },
+            { en: "Elastic Deformation", ku: "شێواندنێک دەتوانێت بگەڕێتەوە شوێنی خۆی", cat: "materials", sub: "Building Material" },
+            { en: "Plastic Deformation", ku: "شێواندنێک ناتوانێت بگەڕێتەوە شوێنی خۆی", cat: "materials", sub: "Building Material" },
+            { en: "Durability", ku: "خۆگری، قایمی و بەرگەگرتن", cat: "materials", sub: "Building Material" },
+            { en: "Aggregate", ku: "چەو و لم", cat: "materials", sub: "Building Material" },
+
+            // ٢. میکانیکی ئەندازیاری (Engineering Mechanics)
+            { en: "Equilibrium", ku: "هاوسەنگی", cat: "mechanics", sub: "Mechanics" },
+            { en: "Resultant", ku: "دەرئەنجام (سەرجەمی هێزەکان)", cat: "mechanics", sub: "Mechanics" },
+            { en: "Moment of Inertia", ku: "زەبری بارنەگۆڕی", cat: "mechanics", sub: "Mechanics" },
+            { en: "Center of Gravity", ku: "ناوەندی کێشکردن (چەقی قورسایی)", cat: "mechanics", sub: "Mechanics" },
+            { en: "Normal Force", ku: "هێزی ئەستوون", cat: "mechanics", sub: "Mechanics" },
+            { en: "Coefficient of Friction", ku: "هاوکۆلکەی لێکخشاندن", cat: "mechanics", sub: "Mechanics" },
+            { en: "Torque", ku: "زەبر (خولانەوە)", cat: "mechanics", sub: "Mechanics" },
+            { en: "Coplanar", ku: "لە یەک ڕووتەختدا (2D)", cat: "mechanics", sub: "Mechanics" },
+
+            // ٣. جیۆلۆجی ئەندازیاری (Engineering Geology)
+            { en: "Igneous Rocks", ku: "بەردی ئاگرین", cat: "geology", sub: "Geology" },
+            { en: "Sedimentary Rocks", ku: "بەردی نیشتوو", cat: "geology", sub: "Geology" },
+            { en: "Metamorphic Rocks", ku: "بەردی گۆڕاو", cat: "geology", sub: "Geology" },
+            { en: "Weathering", ku: "گۆڕانی بەرد لەژێر کاریگەری کەشوهەوا", cat: "geology", sub: "Geology" },
+            { en: "Faults", ku: "درزی تایبەتی ناو چینە بەردەکان", cat: "geology", sub: "Geology" },
+            { en: "Aquifer", cat: "geology", ku: "ئاوی ژێرزەوی", sub: "Geology" },
+            { en: "Earth Crust", ku: "توێکڵی ڕەقی زەوی", cat: "geology", sub: "Geology" },
+
+            // ٤. بیرکاری (Mathematics)
+            { en: "Calculus", ku: "هەژمارکردنی جیاکاری و تەواوکاری", cat: "math", sub: "Mathematic" },
+            { en: "Derivative", ku: "داتاشراو", cat: "math", sub: "Mathematic" },
+            { en: "Integration", ku: "تەواوکاری", cat: "math", sub: "Mathematic" },
+            { en: "Rate of Change", ku: "تێکڕای گۆڕان", cat: "math", sub: "Mathematic" },
+            { en: "Point of Inflection", ku: "خاڵی وەرگەڕان", cat: "math", sub: "Mathematic" },
+
+            // ٥. وێنەکێشان و ئەندازەی وەسفی (Drawing & Descriptive Geometry)
+            { en: "Projection", ku: "دەرخستن و سێبەر (پرۆجێکشن)", cat: "drawing", sub: "Geometry" },
+            { en: "Elevation (Front View)", ku: "بینین لە بەشی پێشەوە", cat: "drawing", sub: "Drawing" },
+            { en: "Plan (Top View)", ku: "بینین لە بەشی سەرەوە", cat: "drawing", sub: "Drawing" },
+            { en: "Hidden Line", ku: "هێڵی نەبینراو (پچڕ پچڕ)", cat: "drawing", sub: "Drawing" },
+            { en: "True Length", ku: "درێژیی ڕاستەقینە", cat: "drawing", sub: "Geometry" },
+
+            // ٦. ئامار (Statistics)
+            { en: "Standard Deviation", ku: "لادانی پێوەر (جیاوازی)", cat: "stats", sub: "Statistics" },
+            { en: "Mean", ku: "تێکڕا (مەعەدەل)", cat: "stats", sub: "Statistics" },
+            { en: "Median", ku: "ناوەند", cat: "stats", sub: "Statistics" },
+            { en: "Probability", ku: "ئەگەر", cat: "stats", sub: "Statistics" },
+
+            // ٧. کۆمپیوتەر (Computer)
+            { en: "Operating System", ku: "سیستەمی ئیشپێکردن", cat: "computer", sub: "Computer" },
+            { en: "User Friendly", ku: "ئاسانە بۆ بەکارهێنەر", cat: "computer", sub: "Computer" },
+            { en: "Database", ku: "کۆگای داتا و زانیاری", cat: "computer", sub: "Computer" }
+        ];
+
+        const cardsContainer = document.getElementById('cardsContainer');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        let activeCategory = 'all';
+
+        function renderCards() {
+            const query = searchInput.value.toLowerCase().trim();
+            cardsContainer.innerHTML = '';
+
+            const filtered = flashcardsData.filter(item => {
+                const matchesCat = (activeCategory === 'all' || item.cat === activeCategory);
+                const matchesQuery = item.en.toLowerCase().includes(query) || item.ku.includes(query);
+                return matchesCat && matchesQuery;
+            });
+
+            if (filtered.length === 0) {
+                cardsContainer.innerHTML = '<p style="text-align:center; color:#9ca3af; padding:30px;">هیچ وشەیەک نەدۆزرایەوە</p>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'fc-item';
+                cardEl.innerHTML = `
+                    <div class="fc-inner">
+                        <div class="fc-front">
+                            <div class="word-info">
+                                <span class="cat-tag">${item.sub}</span>
+                                <span class="en-word">${item.en}</span>
+                            </div>
+                            <button class="sound-btn" onclick="speakWord(event, '${item.en}')">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <div class="fc-back">
+                            <div class="meaning-info">
+                                <div class="ku-word">${item.ku}</div>
+                                <div class="hint">پەنجە بنێ بۆ بینینەوەی وشەکە</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                cardEl.addEventListener('click', (e) => {
+                    if (!e.target.closest('.sound-btn')) {
+                        cardEl.classList.toggle('flipped');
+                    }
+                });
+
+                cardsContainer.appendChild(cardEl);
+            });
         }
 
-        function speakTerm(event, text) {
-            event.stopPropagation(); // ڕێگری دەکات لە هەڵگەڕانەوەی کارت لە کاتی لێدانی دوگمەی دەنگ
+        function speakWord(event, text) {
+            event.stopPropagation();
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'en-US';
-                utterance.rate = 0.85; // کەمێک لەسەرخۆ دەیخوێنێتەوە بۆ فێربوون
+                utterance.rate = 0.85;
                 window.speechSynthesis.speak(utterance);
-            } else {
-                alert('سیستەمی دەنگ لەم وێبگەڕەدا کارا نییە');
             }
         }
+
+        searchInput.addEventListener('input', renderCards);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCategory = btn.getAttribute('data-cat');
+                renderCards();
+            });
+        });
+
+        renderCards();
     </script>
 </body>
 </html>
-
