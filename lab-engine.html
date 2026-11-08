@@ -412,5 +412,23 @@
             document.getElementById('bernoulliResults').classList.add('show');
         }
     </script>
+    <script>
+    function playLabVoice() {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const text = "Welcome to Civil Engineering Hydraulics Lab";
+            const msg = new SpeechSynthesisUtterance(text);
+            msg.lang = 'en-US';
+            msg.rate = 0.9;
+            window.speechSynthesis.speak(msg);
+        }
+    }
+
+    window.addEventListener('load', () => {
+        playLabVoice();
+        document.body.addEventListener('click', playLabVoice, { once: true });
+    });
+</script>
+
 </body>
 </html>
