@@ -294,68 +294,71 @@
     <p>فێربوونی زاراوە و چەمکە سەرەکییە ئەندازیارییەکان بە فلاشکارتی کارلێککار و دەنگ.</p>
     <a href="flashcards.html" class="card-btn">فلاشکارتی ئەندازیاری ←</a>
 </div>
-    <!-- کارتی بەشی تاقیگەکان (دەستە چەپ) -->
-<div class="card" style="text-align: right;">
-    <div style="width: 50px; height: 50px; background: rgba(224,36,195,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto;">
-        <i class="fa-solid fa-flask-vial" style="font-size: 1.6rem; color: #f472b6;"></i>
-    </div>
-    <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 8px;">بەشی تاقیگەکان</h3>
-    <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 16px;">
-        ژمێرەری خودکاری تاقیکردنەوە ئەندازیارییەکان و ئامادەکردنی داتاشیت.
-    </p>
-    <button onclick="openLabModal()" style="width: 100%; background: linear-gradient(135deg, #e024c3, #7e22ce); border: none; border-radius: 20px; color: #fff; padding: 10px 14px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
-        چوونە ناو تاقیگەکان <i class="fa-solid fa-arrow-left"></i>
-    </button>
-</div>
+            <!-- کارتی بەشی تاقیگەکان (تەنیشت ئینگلیزی - دەستە چەپ) -->
+            <div class="card" style="text-align: right; overflow: hidden; display: flex; flex-direction: column;">
+                <div style="width: 100%; height: 130px; margin: -16px -16px 14px -16px; width: calc(100% + 32px); overflow: hidden; position: relative;">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="Civil Engineering Lab" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    <div style="position: absolute; top: 8px; right: 8px; background: rgba(11,7,25,0.85); border: 1px solid #f472b6; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; color: #f472b6; font-size: 0.8rem;">
+                        <i class="fa-solid fa-flask-vial"></i>
+                    </div>
+                </div>
+                <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 8px;">بەشی تاقیگەکان</h3>
+                <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 16px;">
+                    ژمێرەری خودکاری تاقیکردنەوە ئەندازیارییەکان و ئامادەکردنی داتاشیت.
+                </p>
+                <button onclick="openLabModal()" class="card-btn" style="width: 100%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: auto;">
+                    چوونە ناو تاقیگەکان <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
 
-<!-- مۆداڵی داواکردنی کۆدی تاقیگە -->
-<div id="resLabModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 16px;">
-    <div style="background: #16102b; border: 1px solid rgba(224,36,195,0.4); border-radius: 22px; width: 100%; max-width: 380px; padding: 26px 20px; text-align: center; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.7);">
-        <span onclick="closeLabModal()" style="position: absolute; top: 14px; left: 18px; font-size: 1.4rem; color: #94a3b8; cursor: pointer;">&times;</span>
-        <i class="fa-solid fa-shield-halved" style="font-size: 2.2rem; color: #f472b6; margin-bottom: 10px;"></i>
-        <h3 style="font-size: 1.25rem; font-weight: 900; color: #f472b6; margin-bottom: 6px;">کۆدی چوونەژوورەوە</h3>
-        <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 18px;">تکایە ئەو کۆدە بنووسە کە لە بەڕێوەبەرەوە وەرتگرتووە</p>
+            <!-- مۆداڵی داواکردنی کۆد (تەواو بەتاڵ بێ کۆدی ئاشکرا) -->
+            <div id="resLabModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 16px;">
+                <div style="background: #16102b; border: 1px solid rgba(224,36,195,0.4); border-radius: 22px; width: 100%; max-width: 380px; padding: 26px 20px; text-align: center; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.7);">
+                    <span onclick="closeLabModal()" style="position: absolute; top: 14px; left: 18px; font-size: 1.4rem; color: #94a3b8; cursor: pointer;">&times;</span>
+                    <i class="fa-solid fa-shield-halved" style="font-size: 2.2rem; color: #f472b6; margin-bottom: 10px;"></i>
+                    <h3 style="font-size: 1.25rem; font-weight: 900; color: #f472b6; margin-bottom: 6px;">کۆدی چوونەژوورەوە</h3>
+                    <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 18px;">تکایە ئەو کۆدە بنووسە کە لە بەڕێوەبەرەوە وەرتگرتووە</p>
 
-        <input type="text" id="resAccessCode" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.18); color: #fff; font-size: 1.1rem; text-align: center; font-weight: 800; direction: ltr; letter-spacing: 2px; outline: none; margin-bottom: 14px;" autocomplete="off">
-        <button onclick="checkResLabCode()" style="width: 100%; background: linear-gradient(135deg, #e024c3, #7e22ce); border: none; border-radius: 12px; color: #fff; padding: 12px; font-size: 0.95rem; font-weight: 800; cursor: pointer;">تەئکیدکردن و چوونەژوورەوە</button>
+                    <input type="text" id="resAccessCode" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.18); color: #fff; font-size: 1.1rem; text-align: center; font-weight: 800; direction: ltr; letter-spacing: 2px; outline: none; margin-bottom: 14px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                    <button onclick="checkResLabCode()" style="width: 100%; background: linear-gradient(135deg, #e024c3, #7e22ce); border: none; border-radius: 12px; color: #fff; padding: 12px; font-size: 0.95rem; font-weight: 800; cursor: pointer;">تەئکیدکردن و چوونەژوورەوە</button>
 
-        <div id="resCodeError" style="color: #f87171; font-size: 0.8rem; margin-top: 10px; display: none;">
-            <i class="fa-solid fa-triangle-exclamation"></i> ئەم کۆدە نادروستە، تکایە کۆدی دروست بنووسە!
-        </div>
-    </div>
-</div>
+                    <div id="resCodeError" style="color: #f87171; font-size: 0.8rem; margin-top: 10px; display: none;">
+                        <i class="fa-solid fa-triangle-exclamation"></i> ئەم کۆدە نادروستە، تکایە کۆدی دروست بنووسە!
+                    </div>
+                </div>
+            </div>
 
-<script>
-    const labKeys = [
-        "BUNYAD-101", "BUNYAD-102", "BUNYAD-103", "BUNYAD-104", "BUNYAD-105",
-        "BUNYAD-106", "BUNYAD-107", "BUNYAD-108", "BUNYAD-109", "BUNYAD-110"
-    ];
+            <script>
+                const labKeys = [
+                    "BUNYAD-101", "BUNYAD-102", "BUNYAD-103", "BUNYAD-104", "BUNYAD-105",
+                    "BUNYAD-106", "BUNYAD-107", "BUNYAD-108", "BUNYAD-109", "BUNYAD-110"
+                ];
 
-    function openLabModal() {
-        document.getElementById('resLabModal').style.display = 'flex';
-        document.getElementById('resAccessCode').value = '';
-        document.getElementById('resCodeError').style.display = 'none';
-        document.getElementById('resAccessCode').focus();
-    }
+                function openLabModal() {
+                    document.getElementById('resLabModal').style.display = 'flex';
+                    document.getElementById('resAccessCode').value = '';
+                    document.getElementById('resCodeError').style.display = 'none';
+                    document.getElementById('resAccessCode').focus();
+                }
 
-    function closeLabModal() {
-        document.getElementById('resLabModal').style.display = 'none';
-    }
+                function closeLabModal() {
+                    document.getElementById('resLabModal').style.display = 'none';
+                }
 
-    function checkResLabCode() {
-        const val = document.getElementById('resAccessCode').value.trim().toUpperCase();
-        if (labKeys.includes(val)) {
-            window.location.href = 'lab-engine.html';
-        } else {
-            document.getElementById('resCodeError').style.display = 'block';
-        }
-    }
+                function checkResLabCode() {
+                    const val = document.getElementById('resAccessCode').value.trim().toUpperCase();
+                    if (labKeys.includes(val)) {
+                        window.location.href = 'lab-engine.html';
+                    } else {
+                        document.getElementById('resCodeError').style.display = 'block';
+                    }
+                }
 
-    window.addEventListener('click', function(e) {
-        const m = document.getElementById('resLabModal');
-        if (e.target === m) closeLabModal();
-    });
-</script>
+                window.addEventListener('click', function(e) {
+                    const m = document.getElementById('resLabModal');
+                    if (e.target === m) closeLabModal();
+                });
+            </script>
 
     <div class="back-container">
       <a href="index.html" class="home-btn">
