@@ -39,7 +39,7 @@
 
         .container {
             width: 100%;
-            max-width: 720px;
+            max-width: 760px;
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -104,7 +104,7 @@
         }
 
         .trial-badge {
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             font-weight: 800;
             color: var(--pink-accent);
         }
@@ -123,10 +123,11 @@
         .input-group input {
             padding: 9px 10px;
             background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
             color: #fff;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-weight: bold;
             outline: none;
             direction: ltr;
             text-align: center;
@@ -161,7 +162,7 @@
         }
 
         .tube-item input {
-            padding: 7px 4px;
+            padding: 6px;
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 6px;
@@ -195,7 +196,7 @@
 
         .results-box {
             display: none;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.55);
             border: 1px solid var(--pink-accent);
             border-radius: 16px;
             padding: 16px;
@@ -206,27 +207,38 @@
             display: block;
         }
 
+        .summary-card {
+            background: rgba(224, 36, 195, 0.1);
+            border: 1px solid rgba(224, 36, 195, 0.3);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
         .table-responsive {
             overflow-x: auto;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.76rem;
+            font-size: 0.75rem;
             text-align: center;
             direction: ltr;
         }
 
         th, td {
             padding: 8px 4px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         th {
             background: rgba(224, 36, 195, 0.25);
             color: var(--pink-accent);
+            font-weight: bold;
         }
 
         .back-link {
@@ -243,67 +255,68 @@
     <div class="container">
         
         <div class="header-card">
-            <h1>کاکولەیشنی خودکاری تاقیگەی بێرنۆلی</h1>
-            <p>قەبارە بە لیتر و بەرزییەکانی ناو داتاشیتەکە دابنێ</p>
+            <h1>کاکولەیشنی تاقیگەی بێرنۆلی (Bernoulli's Theorem)</h1>
+            <p>قەبارە بە لیتر و کات بە چرکە بنووسە؛ خێرایی، وزە و داتاشیت ئامادە دەکرێن</p>
         </div>
 
         <div class="lab-form">
             <div class="form-title">
-                <i class="fa-solid fa-stopwatch"></i> قەبارە (لیتر) و کات (چرکە) بۆ هەردوو تاقی
+                <i class="fa-solid fa-stopwatch"></i> داتاکانی سەرەتا (Vol بە L و کات بە s)
             </div>
             
             <div class="trials-container">
+                <!-- تاقی یەکەم -->
                 <div class="trial-box">
-                    <span class="trial-badge">تاقی یەکەم (Trial 1)</span>
+                    <span class="trial-badge">خوێندنەوەی ١ (Reading 1)</span>
                     <div class="input-group">
                         <label>قەبارە Vol 1 (بە لیتر L):</label>
-                        <input type="number" id="vol1" value="1" step="0.1">
+                        <input type="number" step="any" id="vol1" value="1">
                     </div>
                     <div class="input-group">
                         <label>کات Time 1 (چرکە s):</label>
-                        <input type="number" id="time1" value="28" step="0.1">
+                        <input type="number" step="any" id="time1" value="28">
                     </div>
                 </div>
 
+                <!-- تاقی دووەم -->
                 <div class="trial-box">
-                    <span class="trial-badge">تاقی دووەم (Trial 2)</span>
+                    <span class="trial-badge">خوێندنەوەی ٢ (Reading 2)</span>
                     <div class="input-group">
                         <label>قەبارە Vol 2 (بە لیتر L):</label>
-                        <input type="number" id="vol2" value="2" step="0.1">
+                        <input type="number" step="any" id="vol2" value="2">
                     </div>
                     <div class="input-group">
                         <label>کات Time 2 (چرکە s):</label>
-                        <input type="number" id="time2" value="43" step="0.1">
+                        <input type="number" step="any" id="time2" value="45">
                     </div>
                 </div>
             </div>
 
             <div class="form-title" style="margin-top: 8px; font-size: 0.95rem; color: var(--pink-accent);">
-                <i class="fa-solid fa-list-ol"></i> بەرزی ئاو لە بۆرییەکان (h بە cm لە وەرەقەکە):
+                <i class="fa-solid fa-list-ol"></i> بەرزی ئاو لە ١١ بۆرییەکە (h بە cm):
             </div>
 
             <div class="tubes-grid">
-                <div class="tube-item"><label>h1 (cm)</label><input type="number" id="h1" value="26.0" step="0.1"></div>
-                <div class="tube-item"><label>h2 (cm)</label><input type="number" id="h2" value="25.4" step="0.1"></div>
-                <div class="tube-item"><label>h3 (cm)</label><input type="number" id="h3" value="24.3" step="0.1"></div>
-                <div class="tube-item"><label>h4 (cm)</label><input type="number" id="h4" value="22.2" step="0.1"></div>
-                <div class="tube-item"><label>h5 (cm)</label><input type="number" id="h5" value="20.5" step="0.1"></div>
-                <div class="tube-item" style="border-color:var(--pink-accent);"><label style="color:#fff; font-weight:bold;">h6 (تەسک)</label><input type="number" id="h6" value="15.5" step="0.1"></div>
-                <div class="tube-item"><label>h7 (cm)</label><input type="number" id="h7" value="20.5" step="0.1"></div>
-                <div class="tube-item"><label>h8 (cm)</label><input type="number" id="h8" value="22.9" step="0.1"></div>
-                <div class="tube-item"><label>h9 (cm)</label><input type="number" id="h9" value="24.8" step="0.1"></div>
-                <div class="tube-item"><label>h10 (cm)</label><input type="number" id="h10" value="25.7" step="0.1"></div>
-                <div class="tube-item"><label>h11 (cm)</label><input type="number" id="h11" value="26.0" step="0.1"></div>
+                <div class="tube-item"><label>h1 (cm)</label><input type="number" step="any" id="h1" value="36.0"></div>
+                <div class="tube-item"><label>h2 (cm)</label><input type="number" step="any" id="h2" value="35.4"></div>
+                <div class="tube-item"><label>h3 (cm)</label><input type="number" step="any" id="h3" value="34.3"></div>
+                <div class="tube-item"><label>h4 (cm)</label><input type="number" step="any" id="h4" value="32.8"></div>
+                <div class="tube-item"><label>h5 (cm)</label><input type="number" step="any" id="h5" value="30.5"></div>
+                <div class="tube-item" style="border-color:var(--pink-accent);"><label style="color:#fff; font-weight:bold;">h6 (تەسک)</label><input type="number" step="any" id="h6" value="25.5"></div>
+                <div class="tube-item"><label>h7 (cm)</label><input type="number" step="any" id="h7" value="26.5"></div>
+                <div class="tube-item"><label>h8 (cm)</label><input type="number" step="any" id="h8" value="27.9"></div>
+                <div class="tube-item"><label>h9 (cm)</label><input type="number" step="any" id="h9" value="29.8"></div>
+                <div class="tube-item"><label>h10 (cm)</label><input type="number" step="any" id="h10" value="30.9"></div>
+                <div class="tube-item"><label>h11 (cm)</label><input type="number" step="any" id="h11" value="31.0"></div>
             </div>
 
             <button class="calc-btn" onclick="runBernoulliSolver()">
                 <i class="fa-solid fa-calculator"></i> حیسابکردن و دەرکردنی داتاشیت
             </button>
 
-            <!-- ئەنجامەکان -->
+            <!-- دەرئەنجام -->
             <div id="bernoulliResults" class="results-box">
-                <h4 style="color:var(--pink-accent); margin-bottom:6px;">ئەنجامی تەواوی داتاشیتەکە:</h4>
-                <div id="b_summary" style="font-size:0.85rem; line-height:1.7; margin-bottom:10px;"></div>
+                <div class="summary-card" id="b_summary"></div>
                 
                 <div class="table-responsive">
                     <table id="b_table">
@@ -331,24 +344,30 @@
 
     <script>
         function runBernoulliSolver() {
-            // وەرگرتنی قەبارە بە لیتر و گۆڕینی بۆ سانتیمەتر سێجا (L * 1000)
-            const v1_L = parseFloat(document.getElementById('vol1').value) || 0;
+            // گۆڕینی لیتر بۆ سانتیمەتر سێجا (L * 1000 = cm^3)
+            const v1_liters = parseFloat(document.getElementById('vol1').value) || 0;
             const t1 = parseFloat(document.getElementById('time1').value) || 1;
-            const v2_L = parseFloat(document.getElementById('vol2').value) || 0;
+            const v2_liters = parseFloat(document.getElementById('vol2').value) || 0;
             const t2 = parseFloat(document.getElementById('time2').value) || 1;
 
-            const v1 = v1_L * 1000;
-            const v2 = v2_L * 1000;
+            if (v1_liters <= 0 || t1 <= 0) {
+                alert("تکایە قەبارە و کات بنووسە!");
+                return;
+            }
 
-            const q1 = v1 / t1;
+            const v1_cm3 = v1_liters * 1000;
+            const q1 = v1_cm3 / t1;
+
             let q2 = 0;
             let qAvg = q1;
 
-            if (v2 > 0 && t2 > 0) {
-                q2 = v2 / t2;
+            if (v2_liters > 0 && t2 > 0) {
+                const v2_cm3 = v2_liters * 1000;
+                q2 = v2_cm3 / t2;
                 qAvg = (q1 + q2) / 2;
             }
 
+            // ڕووبەری ١١ خاڵەکە بە میلیمەتری چوارگۆشە
             const areas = [102.56, 90.11, 77.66, 65.22, 52.77, 40.32, 52.77, 65.22, 77.66, 90.11, 102.56];
             const tbody = document.querySelector('#b_table tbody');
             tbody.innerHTML = '';
@@ -358,10 +377,10 @@
             for (let i = 1; i <= 11; i++) {
                 const hVal = parseFloat(document.getElementById('h' + i).value) || 0;
                 const areaMm2 = areas[i - 1];
-                const areaCm2 = areaMm2 / 100;
+                const areaCm2 = areaMm2 / 100; // گۆڕین بۆ cm^2
                 
-                const v = qAvg / areaCm2;
-                const hv = (v * v) / (2 * 981);
+                const v = qAvg / areaCm2; // cm/s
+                const hv = (v * v) / (2 * 981); // cm
                 const totalHead = hVal + hv;
                 totalHeadSum += totalHead;
 
@@ -378,14 +397,18 @@
 
             const avgTotalHead = (totalHeadSum / 11).toFixed(2);
 
-            let qInfo = `• تەوژمی تاقی ١ (Q1): <b>${q1.toFixed(1)} cm³/s</b><br>`;
+            let summaryHtml = `
+                • تەوژمی یەکەم (Q1): <b>${q1.toFixed(1)} cm³/s</b><br>
+            `;
             if (q2 > 0) {
-                qInfo += `• تەوژمی تاقی ٢ (Q2): <b>${q2.toFixed(1)} cm³/s</b><br>`;
-                qInfo += `• تێکڕای تەوژم (Average Q): <b style="color:#f472b6;">${qAvg.toFixed(1)} cm³/s</b> (وەک دێڕی ٤ی وەرەقەکە)<br>`;
+                summaryHtml += `
+                    • تەوژمی دووەم (Q2): <b>${q2.toFixed(1)} cm³/s</b><br>
+                    • تێکڕای تەوژم (Average Q): <b style="color:#f472b6; font-size:1rem;">${qAvg.toFixed(1)} cm³/s</b> (هەمان 40.1 ی داتاشیتەکەتان)<br>
+                `;
             }
-            qInfo += `• تێکڕای سەرجەمی وزە (Mean Total Head): <b style="color:#38bdf8;">${avgTotalHead} cm</b>`;
+            summaryHtml += `• تێکڕای سەرجەمی وزە (Mean Total Head): <b style="color:#38bdf8;">${avgTotalHead} cm</b>`;
 
-            document.getElementById('b_summary').innerHTML = qInfo;
+            document.getElementById('b_summary').innerHTML = summaryHtml;
             document.getElementById('bernoulliResults').classList.add('show');
         }
     </script>
