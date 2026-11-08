@@ -42,12 +42,12 @@
             position: fixed;
             bottom: 24px;
             left: 24px;
-            width: 175px;
+            width: 180px;
             background: rgba(22, 16, 43, 0.95);
             border: 2px solid var(--pink-accent);
             border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(224, 36, 195, 0.35);
+            box-shadow: 0 10px 30px rgba(224, 36, 195, 0.4);
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -59,28 +59,32 @@
         .lab-corner-card:hover {
             transform: translateY(-8px) scale(1.04);
             border-color: #ffffff;
-            box-shadow: 0 16px 36px rgba(224, 36, 195, 0.55);
+            box-shadow: 0 16px 36px rgba(224, 36, 195, 0.6);
         }
 
         .lab-corner-card:active {
             transform: scale(0.96);
         }
 
+        /* وێنەی تاقیگە */
         .lab-image-container {
             width: 100%;
-            height: 110px;
+            height: 115px;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #1e113a, #0b0719);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #110d24;
         }
 
-        .lab-image-container svg {
+        .lab-image-container img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
             display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .lab-corner-card:hover .lab-image-container img {
+            transform: scale(1.08);
         }
 
         .lab-badge-icon {
@@ -90,18 +94,19 @@
             background: rgba(11, 7, 25, 0.85);
             border: 1px solid var(--pink-accent);
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--pink-accent);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
         .lab-card-footer {
             padding: 10px 8px;
-            background: linear-gradient(180deg, rgba(22, 16, 43, 0.9) 0%, rgba(11, 7, 25, 0.98) 100%);
+            background: linear-gradient(180deg, rgba(22, 16, 43, 0.95) 0%, rgba(11, 7, 25, 1) 100%);
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -116,20 +121,20 @@
 
         .lab-card-footer small {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             color: var(--pink-accent);
-            margin-top: 2px;
+            margin-top: 3px;
             font-weight: 600;
         }
 
-        /* مۆداڵ */
+        /* مۆداڵی داواکردنی کۆد */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.78);
             backdrop-filter: blur(8px);
             display: none;
             justify-content: center;
@@ -182,6 +187,7 @@
             margin-bottom: 18px;
         }
 
+        /* خانەی نووسینی کۆد بە تەواوی خاوێن و بەتاڵە */
         .code-input {
             width: 100%;
             padding: 12px;
@@ -196,12 +202,6 @@
             letter-spacing: 2px;
             outline: none;
             margin-bottom: 14px;
-        }
-
-        .code-input::placeholder {
-            font-size: 0.85rem;
-            letter-spacing: 0;
-            color: #64748b;
         }
 
         .code-input:focus {
@@ -235,74 +235,39 @@
 </head>
 <body>
 
-    <!-- کارتی سووچی دەستە چەپ بە وێنەی گەرەنتیکراوی تاقیگە -->
+    <!-- کارتی دەستە چەپ -->
     <div class="lab-corner-card" onclick="openLabModal()">
         <div class="lab-image-container">
-            <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#241442"/>
-                        <stop offset="100%" stop-color="#0e0720"/>
-                    </linearGradient>
-                    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#f472b6"/>
-                        <stop offset="100%" stop-color="#a855f7"/>
-                    </linearGradient>
-                    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#38bdf8"/>
-                        <stop offset="100%" stop-color="#0284c7"/>
-                    </linearGradient>
-                </defs>
-                <rect width="300" height="180" fill="url(#bgGrad)"/>
-                
-                <!-- مێزی تاقیگە -->
-                <line x1="20" y1="150" x2="280" y2="150" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
-                
-                <!-- شوشەی فلۆو و تاقیگە (Flask) -->
-                <path d="M 85 70 L 105 70 L 105 95 L 125 135 C 127 140, 122 145, 115 145 L 75 145 C 68 145, 63 140, 65 135 L 85 95 Z" fill="none" stroke="#e2e8f0" stroke-width="3"/>
-                <path d="M 75 125 L 115 125 L 118 140 C 119 143, 116 144, 113 144 L 77 144 C 74 144, 71 143, 72 140 Z" fill="url(#liquidGrad)" opacity="0.85"/>
-                
-                <!-- بۆری و کۆنتێنەری تاقیگە (Beaker) -->
-                <rect x="150" y="80" width="45" height="65" rx="3" fill="none" stroke="#e2e8f0" stroke-width="3"/>
-                <rect x="153" y="105" width="39" height="37" rx="2" fill="url(#blueGrad)" opacity="0.8"/>
-                <line x1="147" y1="80" x2="198" y2="80" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round"/>
-                
-                <!-- بۆری تاقیگەی بێرنۆلی و لەرینەوەی شلە -->
-                <path d="M 95 65 Q 140 20 200 65" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4,4"/>
-                <circle cx="215" cy="115" r="16" fill="rgba(224, 36, 195, 0.2)" stroke="#f472b6" stroke-width="2"/>
-                <circle cx="215" cy="115" r="6" fill="#f472b6"/>
-                <circle cx="100" cy="110" r="3" fill="#ffffff" opacity="0.6"/>
-                <circle cx="170" cy="120" r="3" fill="#ffffff" opacity="0.6"/>
-            </svg>
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="Civil Engineering Hydraulics Lab">
             <div class="lab-badge-icon">
                 <i class="fa-solid fa-lock"></i>
             </div>
         </div>
         <div class="lab-card-footer">
             <span>چوونە ژوورەوە بۆ ناو تاقیگەکان</span>
-            <small>پێویستی بە کۆدی تایبەتە <i class="fa-solid fa-key"></i></small>
+            <small>پێویستی بە کۆدە <i class="fa-solid fa-key"></i></small>
         </div>
     </div>
 
-    <!-- مۆداڵی داواکردنی کۆد (بێ ئەوەی هیچ کۆدێکی تێدا دەربکەوێت) -->
+    <!-- مۆداڵی کۆد (هیچ کۆدێک لەسەری دیار نییە) -->
     <div class="modal-overlay" id="labCodeModal">
         <div class="modal-box">
             <span class="close-btn" onclick="closeLabModal()">&times;</span>
             <i class="fa-solid fa-shield-halved" style="font-size: 2.2rem; color: var(--pink-accent); margin-bottom: 10px;"></i>
             <h3>کۆدی چوونەژوورەوە</h3>
-            <p>تکایە ئەو کۆدە بنووسە کە لەلایەن بەڕێوەبەرەوە پێت دراوە</p>
+            <p>تکایە ئەو کۆدە بنووسە کە لە بەڕێوەبەرەوە وەرتگرتووە</p>
 
-            <input type="text" id="accessCodeInput" class="code-input" placeholder="کۆدەکەت لێرە بنووسە...">
+            <input type="text" id="accessCodeInput" class="code-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             <button class="verify-btn" onclick="checkAccessCode()">تەئکیدکردن و چوونەژوورەوە</button>
 
             <div class="error-msg" id="codeError">
-                <i class="fa-solid fa-triangle-exclamation"></i> ئەم کۆدە نادروستە، تکایە پەیوەندی بە بەڕێوەبەرەوە بکە!
+                <i class="fa-solid fa-triangle-exclamation"></i> ئەم کۆدە نادروستە، تکایە کۆدی دروست بنووسە!
             </div>
         </div>
     </div>
 
     <script>
-        // لیستی کۆدە پارێزراوەکان
+        // لیستی ١٠ کۆدە نهێنییەکە (لە BUNYAD-101 تا BUNYAD-110)
         const accessCodes = [
             "BUNYAD-101",
             "BUNYAD-102",
@@ -347,4 +312,3 @@
     </script>
 </body>
 </html>
-
