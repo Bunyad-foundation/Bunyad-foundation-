@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ژمێرەری زیرەکی تاقیگەکان - پلاتفۆرمی ئەندازیاری</title>
+    <title>ژمێرەری زیرەکی تاقیگەی بێرنۆلی - پلاتفۆرمی بونیاد</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #0b0719;
             --card-bg: #16102b;
-            --card-border: rgba(224, 36, 195, 0.3);
+            --card-border: rgba(224, 36, 195, 0.35);
             --primary-grad: linear-gradient(135deg, #e024c3, #7e22ce);
             --pink-accent: #f472b6;
             --blue-accent: #38bdf8;
@@ -29,8 +29,8 @@
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 10% 15%, rgba(224, 36, 195, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 90% 85%, rgba(126, 34, 206, 0.12) 0%, transparent 40%);
+                radial-gradient(circle at 10% 15%, rgba(224, 36, 195, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 85%, rgba(126, 34, 206, 0.15) 0%, transparent 40%);
             color: var(--text-main);
             padding: 20px 14px 60px;
             display: flex;
@@ -39,7 +39,7 @@
 
         .container {
             width: 100%;
-            max-width: 650px;
+            max-width: 680px;
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -65,53 +65,15 @@
             color: var(--text-sub);
         }
 
-        /* بەشی هەڵبژاردنی تاقیگە */
-        .select-box {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 16px;
-        }
-
-        .select-box label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--pink-accent);
-            margin-bottom: 8px;
-        }
-
-        select {
-            width: 100%;
-            padding: 12px 14px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 0.95rem;
-            outline: none;
-            direction: rtl;
-        }
-
-        select option {
-            background: #1a0f30;
-            color: #fff;
-        }
-
-        /* کارتی فۆرمەکان */
         .lab-form {
-            display: none;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 18px;
             padding: 20px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            display: flex;
             flex-direction: column;
             gap: 14px;
-        }
-
-        .lab-form.active {
-            display: flex;
         }
 
         .form-title {
@@ -158,6 +120,42 @@
             border-color: var(--pink-accent);
         }
 
+        .tubes-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .tube-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .tube-item label {
+            font-size: 0.72rem;
+            color: var(--pink-accent);
+            text-align: center;
+            direction: ltr;
+        }
+
+        .tube-item input {
+            padding: 6px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+            text-align: center;
+            direction: ltr;
+        }
+
         .calc-btn {
             background: var(--primary-grad);
             border: none;
@@ -171,7 +169,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-top: 8px;
+            margin-top: 10px;
             box-shadow: 0 6px 18px rgba(224, 36, 195, 0.3);
         }
 
@@ -179,14 +177,13 @@
             transform: scale(0.98);
         }
 
-        /* بەشی ئەنجامەکان */
         .results-box {
             display: none;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--pink-accent);
             border-radius: 16px;
             padding: 16px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .results-box.show {
@@ -201,13 +198,13 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             text-align: center;
             direction: ltr;
         }
 
         th, td {
-            padding: 7px 4px;
+            padding: 8px 4px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -230,63 +227,58 @@
     <div class="container">
         
         <div class="header-card">
-            <h1>ژمێرەری زیرەکی تاقیگەکان (Smart Lab Engine)</h1>
-            <p>تاقیکردنەوەکەت هەڵبژێرە، ژمارەکان دابنێ و حیساباتی داتاشیتەکە وەرگرەوە</p>
+            <h1>کاکولەیشنی خودکاری تاقیگەی بێرنۆلی</h1>
+            <p>تەنها ژمارەکان بنووسە؛ خێرایی، وزەکان و داتاشیتەکە ئامادە دەکرێن</p>
         </div>
 
-        <!-- بەشی دیاریکردنی جۆری تاقیگە -->
-        <div class="select-box">
-            <label><i class="fa-solid fa-list-check"></i> تاقیگەکە دیاری بکە:</label>
-            <select id="labSelect" onchange="switchLab()">
-                <option value="bernoulli">١. تاقیگەی بێرنۆلی (Bernoulli's Theorem)</option>
-                <option value="concrete">٢. قایمی شکان و پەستانی کۆنکرێت (Compressive Strength)</option>
-            </select>
-        </div>
-
-        <!-- تاقیگەی ١: بێرنۆلی -->
-        <div id="bernoulliForm" class="lab-form active">
+        <div class="lab-form">
             <div class="form-title">
-                <i class="fa-solid fa-water"></i> داتاشیتی بێرنۆلی (Fluid Mechanics)
+                <i class="fa-solid fa-water"></i> داتاکانی سەرەتا (Volume & Time)
             </div>
             
             <div class="input-row">
                 <div class="input-group">
                     <label>قەبارەی ئاو Volume (cm³):</label>
-                    <input type="number" id="b_vol" placeholder="بۆ نموونە: 3000">
+                    <input type="number" id="b_vol" value="3000">
                 </div>
                 <div class="input-group">
                     <label>کات Time (چرکە):</label>
-                    <input type="number" id="b_time" placeholder="بۆ نموونە: 25">
+                    <input type="number" id="b_time" value="25">
                 </div>
             </div>
 
-            <p style="font-size: 0.8rem; color: var(--pink-accent); margin-top:4px;">
-                * بەرزیی ئاو (h) بە سانتیمەتر لە بۆرییەکان بنووسە:
-            </p>
-
-            <div class="input-row">
-                <div class="input-group">
-                    <label>بۆری 1 (h1 cm):</label>
-                    <input type="number" id="h1" value="28">
-                </div>
-                <div class="input-group">
-                    <label>بۆری 6 (h6 تەسکترین cm):</label>
-                    <input type="number" id="h6" value="12">
-                </div>
+            <div class="form-title" style="margin-top: 8px; font-size: 0.95rem; color: var(--pink-accent);">
+                <i class="fa-solid fa-list-ol"></i> بەرزی ئاو لە ١١ بۆرییەکە بنووسە (h بە cm):
             </div>
 
-            <button class="calc-btn" onclick="calculateBernoulli()">
-                <i class="fa-solid fa-calculator"></i> حیسابکردنی بێرنۆلی
+            <div class="tubes-grid">
+                <div class="tube-item"><label>h1 (cm)</label><input type="number" id="h1" value="28.0"></div>
+                <div class="tube-item"><label>h2 (cm)</label><input type="number" id="h2" value="26.0"></div>
+                <div class="tube-item"><label>h3 (cm)</label><input type="number" id="h3" value="23.5"></div>
+                <div class="tube-item"><label>h4 (cm)</label><input type="number" id="h4" value="20.0"></div>
+                <div class="tube-item"><label>h5 (cm)</label><input type="number" id="h5" value="16.0"></div>
+                <div class="tube-item" style="border-color:var(--pink-accent);"><label style="color:#fff; font-weight:bold;">h6 (تەسک)</label><input type="number" id="h6" value="12.0"></div>
+                <div class="tube-item"><label>h7 (cm)</label><input type="number" id="h7" value="15.8"></div>
+                <div class="tube-item"><label>h8 (cm)</label><input type="number" id="h8" value="19.5"></div>
+                <div class="tube-item"><label>h9 (cm)</label><input type="number" id="h9" value="23.0"></div>
+                <div class="tube-item"><label>h10 (cm)</label><input type="number" id="h10" value="25.5"></div>
+                <div class="tube-item"><label>h11 (cm)</label><input type="number" id="h11" value="27.0"></div>
+            </div>
+
+            <button class="calc-btn" onclick="runBernoulliSolver()">
+                <i class="fa-solid fa-calculator"></i> حیسابکردن و دەرکردنی داتاشیت
             </button>
 
+            <!-- ئەنجامەکان -->
             <div id="bernoulliResults" class="results-box">
-                <h4 style="color:var(--pink-accent); margin-bottom:8px;">ئەنجامی دەستبەجێ:</h4>
+                <h4 style="color:var(--pink-accent); margin-bottom:6px;">ئەنجامی تەواوی داتاشیتەکە:</h4>
                 <div id="b_summary" style="font-size:0.85rem; line-height:1.6; margin-bottom:10px;"></div>
+                
                 <div class="table-responsive">
                     <table id="b_table">
                         <thead>
                             <tr>
-                                <th>Point</th>
+                                <th>Section</th>
                                 <th>Area (mm²)</th>
                                 <th>v (cm/s)</th>
                                 <th>v²/2g (cm)</th>
@@ -300,33 +292,6 @@
             </div>
         </div>
 
-        <!-- تاقیگەی ٢: کۆنکرێت -->
-        <div id="concreteForm" class="lab-form">
-            <div class="form-title">
-                <i class="fa-solid fa-cube"></i> تاقیگەی شکان و پەستانی کۆنکرێت
-            </div>
-
-            <div class="input-row">
-                <div class="input-group">
-                    <label>باری شکان Load (kN):</label>
-                    <input type="number" id="c_load" placeholder="بۆ نموونە: 450">
-                </div>
-                <div class="input-group">
-                    <label>ڕووبەری قاڵب Area (mm²):</label>
-                    <input type="number" id="c_area" value="22500" placeholder="150x150 = 22500">
-                </div>
-            </div>
-
-            <button class="calc-btn" onclick="calculateConcrete()">
-                <i class="fa-solid fa-bolt"></i> حیسابکردنی قایمی کۆنکرێت
-            </button>
-
-            <div id="concreteResults" class="results-box">
-                <h4 style="color:var(--blue-accent); margin-bottom:8px;">ئەنجامی شکان:</h4>
-                <div id="c_summary" style="font-size:0.9rem; line-height:1.7;"></div>
-            </div>
-        </div>
-
         <a href="resources.html" class="back-link">
             <i class="fa-solid fa-arrow-right"></i> گەڕانەوە بۆ سەرچاوەکان
         </a>
@@ -334,76 +299,53 @@
     </div>
 
     <script>
-        function switchLab() {
-            const selected = document.getElementById('labSelect').value;
-            document.getElementById('bernoulliForm').classList.toggle('active', selected === 'bernoulli');
-            document.getElementById('concreteForm').classList.toggle('active', selected === 'concrete');
-        }
+        function runBernoulliSolver() {
+            const vol = parseFloat(document.getElementById('b_vol').value) || 0;
+            const time = parseFloat(document.getElementById('b_time').value) || 1;
+            
+            if (vol <= 0 || time <= 0) {
+                alert("تکایە قەبارە و کات بە ژمارەی دروست بنووسە!");
+                return;
+            }
 
-        // حیساباتی بێرنۆلی
-        function calculateBernoulli() {
-            const vol = parseFloat(document.getElementById('b_vol').value) || 3000;
-            const time = parseFloat(document.getElementById('b_time').value) || 25;
             const Q = vol / time; // cm^3/s
 
+            // ڕووبەری ١١ خاڵەکە لە مەنفێستی تاقیگە
             const areas = [102.56, 90.11, 77.66, 65.22, 52.77, 40.32, 52.77, 65.22, 77.66, 90.11, 102.56];
-            const h1 = parseFloat(document.getElementById('h1').value) || 28;
-            const h6 = parseFloat(document.getElementById('h6').value) || 12;
-
             const tbody = document.querySelector('#b_table tbody');
             tbody.innerHTML = '';
 
-            // دروستکردنی نموونەی تەواو بۆ ١١ خاڵەکە
-            for(let i = 0; i < 11; i++) {
-                const areaCm = areas[i] / 100; // mm^2 to cm^2
-                const v = Q / areaCm; // cm/s
+            let totalHeadSum = 0;
+
+            for (let i = 1; i <= 11; i++) {
+                const hVal = parseFloat(document.getElementById('h' + i).value) || 0;
+                const areaMm2 = areas[i - 1];
+                const areaCm2 = areaMm2 / 100; // mm² -> cm²
+                
+                const v = Q / areaCm2; // cm/s
                 const hv = (v * v) / (2 * 981); // cm
-                // خەمڵاندنی بەرزی بەپێی شێوەی بۆری
-                const h = (i === 5) ? h6 : (h1 - (areas[0] - areas[i]) * 0.15);
-                const total = h + hv;
+                const totalHead = hVal + hv;
+                totalHeadSum += totalHead;
 
                 const row = `<tr>
-                    <td>${i+1}</td>
-                    <td>${areas[i]}</td>
+                    <td><b>${i}</b></td>
+                    <td>${areaMm2}</td>
                     <td>${v.toFixed(1)}</td>
                     <td>${hv.toFixed(2)}</td>
-                    <td>${h.toFixed(1)}</td>
-                    <td style="font-weight:bold; color:#38bdf8;">${total.toFixed(2)}</td>
+                    <td>${hVal.toFixed(1)}</td>
+                    <td style="font-weight:bold; color:#38bdf8;">${totalHead.toFixed(2)}</td>
                 </tr>`;
                 tbody.innerHTML += row;
             }
 
+            const avgTotalHead = (totalHeadSum / 11).toFixed(2);
+
             document.getElementById('b_summary').innerHTML = `
-                • تەوژمی ئاو (Q): <b>${Q.toFixed(2)} cm³/s</b><br>
-                • خێرایی لە تەسکترین خاڵ (خاڵی ٦): <b>${(Q / (40.32/100)).toFixed(1)} cm/s</b> (بەرزترینە)
+                • تەوژمی ئاو (Flow Rate - Q): <b>${Q.toFixed(2)} cm³/s</b><br>
+                • تێکڕای وزەی گشتی (Average Total Head): <b style="color:#38bdf8;">${avgTotalHead} cm</b> (دەبێت سەرجەم خاڵەکان نزیک بن لەم ژمارەیە)
             `;
+
             document.getElementById('bernoulliResults').classList.add('show');
-        }
-
-        // حیساباتی کۆنکرێت
-        function calculateConcrete() {
-            const load = parseFloat(document.getElementById('c_load').value);
-            const area = parseFloat(document.getElementById('c_area').value) || 22500;
-
-            if(!load) {
-                alert('تکایە بڕی باری شکان (Load) بنووسە');
-                return;
-            }
-
-            const strength = (load * 1000) / area; // N/mm^2 (MPa)
-            let evaluation = "";
-            if(strength >= 25) {
-                evaluation = "<span style='color:#4ade80;'>کۆنکرێتێکی بەهێزە و گونجاوە بۆ کاری بیناسازی (C25 یان زیاتر).</span>";
-            } else {
-                evaluation = "<span style='color:#f87171;'>قایمییەکەی کەمە، دەبێت پشکنینی ڕێژەی ئاو و چیمەنتۆ بکرێتەوە.</span>";
-            }
-
-            document.getElementById('c_summary').innerHTML = `
-                • باری شکان (Load): <b>${load} kN</b><br>
-                • قایمی پەستان (Compressive Strength - f'c): <b style="font-size:1.1rem; color:#f472b6;">${strength.toFixed(2)} MPa (N/mm²)</b><br>
-                • هەڵسەنگاندن: ${evaluation}
-            `;
-            document.getElementById('concreteResults').classList.add('show');
         }
     </script>
 </body>
