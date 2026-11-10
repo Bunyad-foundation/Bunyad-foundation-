@@ -246,6 +246,200 @@
         <div class="lab-card-footer">
             <span>چوونە ژوورەوە بۆ ناو تاقیگەکان</span>
             <small>پێویستی بە کۆدە <i class="fa-solid fa-key"></i></small>
+            <!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>بونیاد - تاقیکردنەوەی ٥: Bulk Density & Voids</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0719;
+            --card-bg: #16102b;
+            --card-border: rgba(224, 36, 195, 0.35);
+            --pink-accent: #e024c3;
+            --purple-accent: #7c3aed;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --success: #10b981;
+            --border-input: rgba(255, 255, 255, 0.12);
+        }
+        * { box-sizing: border-box; font-family: 'Vazirmatn', system-ui, sans-serif; }
+        body { background: var(--bg-color); color: var(--text-main); margin: 0; padding: 16px; padding-bottom: 60px; }
+        
+        .nav-back { display: inline-flex; align-items: center; gap: 8px; color: var(--pink-accent); text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-bottom: 16px; }
+        
+        .header { text-align: center; margin-bottom: 24px; }
+        .header h1 { font-size: 1.3rem; color: #fff; margin: 8px 0; }
+        .header p { font-size: 0.85rem; color: var(--text-sub); margin: 0; }
+
+        .card { background: var(--card-bg); border-radius: 16px; padding: 18px; margin-bottom: 16px; border: 1px solid var(--card-border); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .card-title { font-weight: 700; color: var(--pink-accent); font-size: 1rem; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        .text-desc { font-size: 0.88rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 10px; }
+        .list-items { padding-right: 20px; margin: 0 0 10px 0; font-size: 0.86rem; color: #cbd5e1; line-height: 1.6; }
+        .list-items li { margin-bottom: 6px; }
+
+        .formula-box { background: rgba(0,0,0,0.35); border-left: 3px solid var(--pink-accent); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.88rem; color: #38bdf8; direction: ltr; text-align: left; margin: 10px 0; line-height: 1.6; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; color: #e2e8f0; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border-input); background: rgba(255,255,255,0.05); color: #fff; font-size: 0.95rem; outline: none; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--pink-accent); }
+
+        .btn-calc { background: linear-gradient(135deg, var(--pink-accent), var(--purple-accent)); color: white; border: none; width: 100%; padding: 14px; border-radius: 12px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 15px rgba(224, 36, 195, 0.3); }
+        .btn-calc:active { transform: scale(0.98); }
+
+        .results { background: rgba(16, 185, 129, 0.08); border: 1px solid var(--success); border-radius: 12px; padding: 16px; margin-top: 16px; display: none; }
+        .res-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+        .res-item:last-child { border-bottom: none; }
+        .res-item span.val { font-weight: 700; color: #4ade80; direction: ltr; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <a href="lab.html" class="nav-back">➔ گەڕانەوە بۆ ژووری تاقیگە</a>
+
+    <div class="header">
+        <p>زانکۆی گەرمیان • ئەندازیاری شارستانی • تاقیگەی کۆنکرێت (2026-2027)</p>
+        <h1>تاقیکردنەوەی ٥: Bulk Density and Voids in Aggregate</h1>
+        <p>بەپێی ستانداردی ئەوروپی: BS EN 1097-3: 1998</p>
+    </div>
+
+    <!-- ١. ئامانجی سەرەکی -->
+    <div class="card">
+        <div class="card-title">🎯 ئامانجی تاقیکردنەوە (Objectives)</div>
+        <p class="text-desc">ئەم تاقیکردنەوەیە لە تاقیگەی کۆنکرێت بۆ فێربوونی ئەم خاڵانە ئەنجام دەدرێت:</p>
+        <ul class="list-items">
+            <li>دۆزینەوەی چڕیی قەبارەیی (Bulk Density) بۆ ڕکامی وشک (ورد / لم و درشت / چەو).</li>
+            <li>دیاریکردنی لەسەدی بۆشاییەکانی نێوان دەنکۆڵەکانی ناو قاڵبەکە (% of Voids).</li>
+            <li>تێگەیشتن لە کاریگەریی ڕادەی کوتین (Degree of Packing) لەسەر کێشی قەبارەیی بۆ دیزاینی تێکەڵەی کۆنکرێت.</li>
+        </ul>
+    </div>
+
+    <!-- ٢. ئامێرەکان و شێوازی جێبەجێکردن -->
+    <div class="card">
+        <div class="card-title">⚙️ کەرەستە و شێوازی جێبەجێکردن (Procedure)</div>
+        <ul class="list-items">
+            <li><strong>سلندەری کانزایی:</strong> قەبارەی 2L بۆ لم و 14.4L بۆ چەو. شیشی کوتین (تیرەی 16mm، درێژیی 600mm).</li>
+            <li><strong>M1:</strong> کێشانی سلندەری بەتاڵ.</li>
+            <li><strong>M2 (دۆخی کوتراو - Compacted):</strong> پڕکردنی سلندەر بە ٣ چین، کوتینی هەر چینێک بە شیش (٥٠ لێدان بۆ چەو، ٢٠ لێدان بۆ لم)، پاشان کێشانی سلندەر لەگەڵ ڕکامەکە.</li>
+            <li><strong>M3 (دۆخی نەکوتراو - Loose):</strong> پڕکردنی بە یەک قۆناغ بەبێ کوتین لە بەرزایی کەمتر لە 50mm، پاشان کێشانی.</li>
+            <li><strong>M4:</strong> پڕکردنی سلندەرەکە بە تەنها ئاو و کێشانی (بۆ دۆزینەوەی قەبارەی دەقیقی سلندەرەکە).</li>
+        </ul>
+    </div>
+
+    <!-- ٣. یاساکان و یەکە گۆڕین -->
+    <div class="card">
+        <div class="card-title">📐 یاساکانی شیکاری و یەکەکان (Formulas & Units)</div>
+        <p class="text-desc">هەموو کێشەکان بە کیلۆگرام (kg)، چڕیی ئاو $W = 1000\text{ kg/m}^3$، و قەبارە بە مەتری سێجا ($m^3$):</p>
+        <div class="formula-box">
+            V = (M4 - M1) / 1000  [m³]<br>
+            ρc (Compacted) = (M2 - M1) / V  [kg/m³]<br>
+            ρL (Loose) = (M3 - M1) / V  [kg/m³]<br>
+            % Voids = [1 - (ρc / (G × 1000))] × 100
+        </div>
+    </div>
+
+    <!-- ٤. داتاشیت و حیساباتە زیرەکەکە -->
+    <div class="card">
+        <div class="card-title">📝 داتاشیتی ئەلیکترۆنی (Data Sheet)</div>
+        
+        <div class="grid-2">
+            <div class="form-group">
+                <label>جۆری ڕکام (Aggregate Type):</label>
+                <select id="aggType">
+                    <option value="coarse">چەو (Coarse Aggregate)</option>
+                    <option value="fine">لم (Fine Aggregate)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>کێشی تایبەتی ڕکام (G):</label>
+                <input type="number" id="sg" step="0.01" value="2.65">
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="form-group">
+                <label>M1: کێشی سلندەری بەتاڵ (kg)</label>
+                <input type="number" id="m1" step="0.001" placeholder="بۆ نموونە: 3.52">
+            </div>
+            <div class="form-group">
+                <label>M2: سلندەر + ڕکامی کوتراو (kg)</label>
+                <input type="number" id="m2" step="0.001" placeholder="بۆ نموونە: 27.15">
+            </div>
+            <div class="form-group">
+                <label>M3: سلندەر + ڕکامی نەکوتراو (kg)</label>
+                <input type="number" id="m3" step="0.001" placeholder="بۆ نموونە: 25.20">
+            </div>
+            <div class="form-group">
+                <label>M4: سلندەر + تەواو پڕ لە ئاو (kg)</label>
+                <input type="number" id="m4" step="0.001" placeholder="بۆ نموونە: 17.92">
+            </div>
+        </div>
+
+        <button class="btn-calc" onclick="calculateLabTest5()">شیکاریکردنی ئەنجامەکان</button>
+
+        <div id="resultBox" class="results">
+            <div class="res-item">
+                <span>قەبارەی سلندەر (V):</span>
+                <span class="val" id="resV">-</span>
+            </div>
+            <div class="res-item">
+                <span>چڕیی کوتراو (Compacted - ρc):</span>
+                <span class="val" id="resPc">-</span>
+            </div>
+            <div class="res-item">
+                <span>چڕیی نەکوتراو (Loose - ρL):</span>
+                <span class="val" id="resPl">-</span>
+            </div>
+            <div class="res-item">
+                <span>ڕێژەی (ρL / ρc):</span>
+                <span class="val" id="resRatio">-</span>
+            </div>
+            <div class="res-item">
+                <span>ڕێژەی بۆشاییەکان (% Voids):</span>
+                <span class="val" id="resVoids">-</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateLabTest5() {
+            const m1 = parseFloat(document.getElementById('m1').value);
+            const m2 = parseFloat(document.getElementById('m2').value);
+            const m3 = parseFloat(document.getElementById('m3').value);
+            const m4 = parseFloat(document.getElementById('m4').value);
+            const G = parseFloat(document.getElementById('sg').value);
+            const W = 1000; // چڕیی ئاو kg/m³
+
+            if (isNaN(m1) || isNaN(m2) || isNaN(m3) || isNaN(m4) || isNaN(G)) {
+                alert("تکایە هەموو خانەکانی کێش بە ژمارەی دروست داخڵ بکە.");
+                return;
+            }
+
+            // Calculations
+            const V = (m4 - m1) / W; // m3
+            const pc = (m2 - m1) / V; // kg/m3
+            const pL = (m3 - m1) / V; // kg/m3
+            const ratio = pL / pc;
+            const voids = (1 - (pc / (G * W))) * 100;
+
+            // Output formatting
+            document.getElementById('resV').innerText = V.toFixed(4) + " m³ (" + (V * 1000).toFixed(1) + " Liters)";
+            document.getElementById('resPc').innerText = pc.toFixed(1) + " kg/m³";
+            document.getElementById('resPl').innerText = pL.toFixed(1) + " kg/m³";
+            document.getElementById('resRatio').innerText = ratio.toFixed(2);
+            document.getElementById('resVoids').innerText = voids.toFixed(2) + " %";
+
+            document.getElementById('resultBox').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
         </div>
     </div>
 
