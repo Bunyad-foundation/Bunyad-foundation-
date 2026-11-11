@@ -1,1 +1,357 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تاقیکردنەوەی ٤: لێدانی فوارەی ئاو (Impact of Jet) - بونیاد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0719;
+            --card-bg: #16102b;
+            --card-border: rgba(56, 189, 248, 0.35);
+            --primary-grad: linear-gradient(135deg, #0284c7, #2563eb);
+            --blue-accent: #38bdf8;
+            --pink-accent: #e024c3;
+            --text-main: #ffffff;
+            --text-sub: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 85%, rgba(37, 99, 235, 0.15) 0%, transparent 40%);
+            color: var(--text-main);
+            padding: 20px 14px 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .header-card {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(37, 99, 235, 0.25));
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-card h1 {
+            font-size: 1.35rem;
+            font-weight: 900;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .header-card p {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--blue-accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        .info-list li {
+            position: relative;
+            padding-right: 18px;
+        }
+
+        .info-list li::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: var(--blue-accent);
+            font-weight: bold;
+        }
+
+        .equation-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px dashed var(--card-border);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            direction: ltr;
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: var(--blue-accent);
+            margin-top: 4px;
+        }
+
+        .lab-form {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+            text-align: center;
+            direction: ltr;
+        }
+
+        th, td {
+            padding: 8px 4px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        th {
+            background: rgba(2, 132, 199, 0.25);
+            color: var(--blue-accent);
+            font-weight: bold;
+        }
+
+        .table-input {
+            width: 100%;
+            min-width: 65px;
+            padding: 6px 4px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .table-input:focus {
+            border-color: var(--blue-accent);
+        }
+
+        .calc-btn {
+            background: var(--primary-grad);
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            padding: 14px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 6px 18px rgba(2, 132, 199, 0.3);
+        }
+
+        .calc-btn:active {
+            transform: scale(0.98);
+        }
+
+        .back-link {
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="header-card">
+            <h1>تاقیکردنەوەی ٤: لێدانی فوارەی ئاو (Impact of a Water Jet)</h1>
+            <p>لێکۆڵینەوە لە هێزی کاردانەوەی ئاو کاتێک بەر پلێتێکی ڕووتەخت دەکەوێت و بەراوردکردنی لەگەڵ هاوکێشەی تەوژم (Momentum Equation)</p>
+        </div>
+
+        <!-- بەشی ئامانج و زانیاری پێویست -->
+        <div class="info-card">
+            <div class="info-title">
+                <i class="fa-solid fa-bullseye"></i> ئامانجەکانی تاقیکردنەوە و تێگەیشتنی خوێندکار
+            </div>
+            <ul class="info-list">
+                <li><strong>ئامانج:</strong> پێوانی هێزی پەرچەکردار (Reaction Force) کە فوارەی ئاوەکە لەسەر پلێتێکی تەخت (Flat Plate) دروستی دەکات، و بەراوردکردنی لەگەڵ هێزی تیۆری[span_4](start_span)[span_4](end_span).</li>
+                <li><strong>هێزی هاوسەنگکەر (F_bal):</strong> هێزە پراکتیکییەکەیە لەسەر ئامێرەکە بە دانانی بارستە لەسەر کەفە ($F = M \times g$)[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span).</li>
+                <li><strong>هێزی فوارە (F_jet):</strong> بەپێی هاوکێشەی مۆمێنتەم بۆ پلێتی تەخت ($\theta = 90^\circ$ و $\cos\theta = 0$):</li>
+            </ul>
+            <div class="equation-box">
+                F_jet = ρ × Q × v &nbsp;|&nbsp; F_bal = M × g
+            </div>
+        </div>
+
+        <!-- فۆرمی داتاشیت و ژمێرەر -->
+        <div class="lab-form">
+            <div class="info-title" style="color: #fff;">
+                <i class="fa-solid fa-table-list"></i> داتاشیتی تاقیگە و حیسابات
+            </div>
+
+            <div style="display: flex; gap: 12px; align-items: center; background: rgba(0,0,0,0.25); padding: 10px; border-radius: 10px;">
+                <label style="font-size: 0.85rem; color: var(--text-sub);">تیرەی نۆزڵ (Nozzle Diameter بە mm):</label>
+                <input type="number" id="nozzleDia" value="10" step="any" style="width: 70px; padding: 6px; background: #000; border: 1px solid var(--card-border); color: #fff; border-radius: 6px; text-align: center;">
+            </div>
+
+            <div class="table-responsive">
+                <table id="jetTable">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>قەبارە Vol (L)</th>
+                            <th>کات Time (s)</th>
+                            <th>بارستە Mass (g)</th>
+                            <th>تەوژم Q (L/s)</th>
+                            <th>خێرایی v (m/s)</th>
+                            <th>F_bal (N)</th>
+                            <th>F_jet (N)</th>
+                            <th>Error (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>1</b></td>
+                            <td><input type="number" step="any" class="table-input vol" value="5"></td>
+                            <td><input type="number" step="any" class="table-input time" value="38"></td>
+                            <td><input type="number" step="any" class="table-input mass" value="150"></td>
+                            <td class="res-q">-</td>
+                            <td class="res-v">-</td>
+                            <td class="res-fbal">-</td>
+                            <td class="res-fjet">-</td>
+                            <td class="res-err">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>2</b></td>
+                            <td><input type="number" step="any" class="table-input vol" value="5"></td>
+                            <td><input type="number" step="any" class="table-input time" value="32"></td>
+                            <td><input type="number" step="any" class="table-input mass" value="200"></td>
+                            <td class="res-q">-</td>
+                            <td class="res-v">-</td>
+                            <td class="res-fbal">-</td>
+                            <td class="res-fjet">-</td>
+                            <td class="res-err">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>3</b></td>
+                            <td><input type="number" step="any" class="table-input vol" value="5"></td>
+                            <td><input type="number" step="any" class="table-input time" value="26"></td>
+                            <td><input type="number" step="any" class="table-input mass" value="300"></td>
+                            <td class="res-q">-</td>
+                            <td class="res-v">-</td>
+                            <td class="res-fbal">-</td>
+                            <td class="res-fjet">-</td>
+                            <td class="res-err">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>4</b></td>
+                            <td><input type="number" step="any" class="table-input vol" value="5"></td>
+                            <td><input type="number" step="any" class="table-input time" value="22"></td>
+                            <td><input type="number" step="any" class="table-input mass" value="400"></td>
+                            <td class="res-q">-</td>
+                            <td class="res-v">-</td>
+                            <td class="res-fbal">-</td>
+                            <td class="res-fjet">-</td>
+                            <td class="res-err">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="calc-btn" onclick="calculateJet()">
+                <i class="fa-solid fa-calculator"></i> حیسابکردنی داتاکان
+            </button>
+        </div>
+
+        <a href="lab.html" class="back-link">
+            <i class="fa-solid fa-arrow-right"></i> گەڕانەوە بۆ بەشی سەرەکیی تاقیگەکان
+        </a>
+
+    </div>
+
+    <script>
+        function calculateJet() {
+            const diaMm = parseFloat(document.getElementById('nozzleDia').value) || 10;
+            const diaM = diaMm / 1000;
+            const area = (Math.PI * Math.pow(diaM, 2)) / 4; // m^2
+            const g = 9.81;
+            const rho = 1000; // kg/m^3
+
+            const rows = document.querySelectorAll('#jetTable tbody tr');
+
+            rows.forEach(row => {
+                const volL = parseFloat(row.querySelector('.vol').value) || 0;
+                const timeS = parseFloat(row.querySelector('.time').value) || 1;
+                const massG = parseFloat(row.querySelector('.mass').value) || 0;
+
+                if (volL > 0 && timeS > 0) {
+                    const volM3 = volL / 1000;
+                    const q_m3s = volM3 / timeS;
+                    const q_ls = volL / timeS;
+                    const v = q_m3s / area;
+
+                    const massKg = massG / 1000;
+                    const fBal = massKg * g;
+                    const fJet = rho * q_m3s * v;
+
+                    let error = 0;
+                    if (fBal > 0) {
+                        error = Math.abs((fBal - fJet) / fBal) * 100;
+                    }
+
+                    row.querySelector('.res-q').innerText = q_ls.toFixed(3);
+                    row.querySelector('.res-v').innerText = v.toFixed(2);
+                    row.querySelector('.res-fbal').innerText = fBal.toFixed(3);
+                    row.querySelector('.res-fjet').innerText = fJet.toFixed(3);
+                    row.querySelector('.res-err').innerHTML = `<span style="color:${error > 25 ? '#ef4444' : '#38bdf8'}; font-weight:bold;">${error.toFixed(1)}%</span>`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
 
